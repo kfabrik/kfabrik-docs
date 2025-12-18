@@ -1,0 +1,28 @@
+site_name: KFabrik Documentation
+site_description: Documentation for KFabrik
+site_url: https://kfabrik-docs.github.io/
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Contributing: contributing.md
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+
+plugins:
+  - search
