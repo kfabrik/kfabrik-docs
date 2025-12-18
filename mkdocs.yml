@@ -1,10 +1,13 @@
 site_name: KFabrik Documentation
 site_description: Open-source tool to democratize cloud-native AI development
 site_url: https://kfabrik.io/
+repo_url: https://github.com/kserve
+repo_name: kserve
 
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - CNCF Landscape: cncf-landscape.md
   - PRFAQ: prfaq.md
   - Contributing: contributing.md
 
