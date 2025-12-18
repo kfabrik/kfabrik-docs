@@ -8,7 +8,7 @@
 
 **Developer and CI tool eliminates weeks of setup, delivers production-like CNCF AI stacks in minutes**
 
-**[CITY, DATE]** — The KFabrik project today announced the release of its open-source developer and continuous integration (CI) tool designed to eliminate the complexity barrier preventing teams from building and testing cloud-native AI applications. KFabrik enables developers to spin up complete, production-like CNCF AI stacks—including Kubernetes, KServe, Ray, vLLM, and vector databases—on their laptops or in CI pipelines in minutes instead of weeks.
+**TAMPA, FL — January 31, 2026** — The KFabrik project today announced the release of its open-source developer and continuous integration (CI) tool designed to eliminate the complexity barrier preventing teams from building and testing cloud-native AI applications. KFabrik enables developers to spin up complete, production-like CNCF AI stacks—including Kubernetes, KServe, Ray, vLLM, and vector databases—on their laptops or in CI pipelines in minutes instead of weeks.
 
 **The Problem: A Patchwork of Tools Creates Complexity and Risk**
 
