@@ -6,17 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentation for KFabrik">
+        <meta name="description" content="Open-source tool to democratize cloud-native AI development">
       
       
       
-        <link rel="canonical" href="https://kfabrik-docs.github.io/getting-started/">
+        <link rel="canonical" href="https://kfabrik.io/getting-started/">
       
       
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../contributing/">
+        <link rel="next" href="../prfaq/">
       
       
         
@@ -237,6 +237,25 @@
   
   
     <li class="md-tabs__item">
+      <a href="../prfaq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PRFAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../contributing/" class="md-tabs__link">
         
   
@@ -379,6 +398,90 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#system-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-basic-kserve-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum (Basic KServe Development)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-ray-clusters-or-llm-serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended (Ray Clusters or LLM Serving)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start-coming-soon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start (Coming Soon)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-youll-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You'll Get
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack Profiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation Development
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Documentation Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -388,23 +491,28 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#local-development" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation
+        Local Development
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#local-development" class="md-nav__link">
+  <a href="#stay-updated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Local Development
+        Stay Updated
       
     </span>
   </a>
@@ -415,6 +523,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prfaq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PRFAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -464,20 +599,74 @@
 
 
 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>KFabrik is currently in early development. The software will be released in the coming weeks.</p>
+<h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
+<p>When released, KFabrik will require:</p>
+<h3 id="minimum-basic-kserve-development">Minimum (Basic KServe Development)<a class="headerlink" href="#minimum-basic-kserve-development" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CPU</strong>: 4 cores (8 recommended)</li>
+<li><strong>RAM</strong>: 8GB (16GB recommended)</li>
+<li><strong>Disk</strong>: 20GB free space</li>
+<li><strong>OS</strong>: Linux, macOS, or Windows with WSL2</li>
+<li><strong>Software</strong>: Docker or Podman</li>
+</ul>
+<h3 id="recommended-ray-clusters-or-llm-serving">Recommended (Ray Clusters or LLM Serving)<a class="headerlink" href="#recommended-ray-clusters-or-llm-serving" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CPU</strong>: 8+ cores</li>
+<li><strong>RAM</strong>: 32GB+</li>
+<li><strong>GPU</strong>: Optional but recommended for LLM inference testing</li>
+</ul>
+<h2 id="quick-start-coming-soon">Quick Start (Coming Soon)<a class="headerlink" href="#quick-start-coming-soon" title="Permanent link">&para;</a></h2>
+<p>Once released, getting started will be simple:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install KFabrik</span>
+pip<span class="w"> </span>install<span class="w"> </span>kfabrik
+
+<span class="c1"># Bootstrap a complete KServe stack</span>
+kfabrik<span class="w"> </span>bootstrap<span class="w"> </span>--profile<span class="w"> </span>kserve-basic
+
+<span class="c1"># Verify the stack is running</span>
+kfabrik<span class="w"> </span>status
+</code></pre></div>
+
+<p>A complete KServe-based inference environment will be running locally in under 15 minutes.</p>
+<h2 id="what-youll-get">What You'll Get<a class="headerlink" href="#what-youll-get" title="Permanent link">&para;</a></h2>
+<p>A fully functional cloud-native AI environment including:</p>
+<ul>
+<li>Kubernetes cluster (kind or k3s)</li>
+<li>KServe with Istio/Knative</li>
+<li>Sample model deployment</li>
+<li>Observability tools (optional)</li>
+</ul>
+<h2 id="stack-profiles">Stack Profiles<a class="headerlink" href="#stack-profiles" title="Permanent link">&para;</a></h2>
+<p>KFabrik will support multiple stack profiles:</p>
+<ul>
+<li><strong>kserve-basic</strong>: KServe with minimal dependencies for model serving</li>
+<li><strong>kserve-ray</strong>: KServe + Ray for distributed workloads</li>
+<li><strong>rag-stack</strong>: KServe + vector database for RAG patterns</li>
+<li><strong>full-stack</strong>: Complete CNAI stack with all components</li>
+</ul>
+<h2 id="documentation-development">Documentation Development<a class="headerlink" href="#documentation-development" title="Permanent link">&para;</a></h2>
+<p>This documentation site is built with MkDocs. To contribute to the documentation:</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Python 3.8+</li>
 <li>pip</li>
 </ul>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-material
-</code></pre></div>
+<h3 id="local-development">Local Development<a class="headerlink" href="#local-development" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 
-<h2 id="local-development">Local Development<a class="headerlink" href="#local-development" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>mkdocs<span class="w"> </span>serve
+<span class="c1"># Serve documentation locally</span>
+mkdocs<span class="w"> </span>serve
 </code></pre></div>
 
 <p>Visit <code>http://127.0.0.1:8000</code> to view the documentation locally.</p>
+<h2 id="stay-updated">Stay Updated<a class="headerlink" href="#stay-updated" title="Permanent link">&para;</a></h2>
+<ul>
+<li>GitHub: <a href="https://github.com/kfabrik">github.com/kfabrik</a></li>
+<li>Documentation: <a href="https://kfabrik.io">kfabrik.io</a></li>
+</ul>
+<p>Watch the repository for updates on the initial release.</p>
 
 
 

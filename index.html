@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentation for KFabrik">
+        <meta name="description" content="Open-source tool to democratize cloud-native AI development">
       
       
       
-        <link rel="canonical" href="https://kfabrik-docs.github.io/">
+        <link rel="canonical" href="https://kfabrik.io/">
       
       
       
@@ -235,6 +235,25 @@
   
   
     <li class="md-tabs__item">
+      <a href="prfaq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PRFAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="contributing/" class="md-tabs__link">
         
   
@@ -350,10 +369,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#what-is-kfabrik" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        What is KFabrik?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-we-solve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem We Solve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#our-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Our Solution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Components
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Status
       
     </span>
   </a>
@@ -365,6 +428,17 @@
     <span class="md-ellipsis">
       
         Quick Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-for-the-cncf-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built for the CNCF Ecosystem
       
     </span>
   </a>
@@ -394,6 +468,33 @@
     
   
     Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="prfaq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PRFAQ
   
 
     
@@ -451,14 +552,37 @@
 
 
 <h1 id="kfabrik-documentation">KFabrik Documentation<a class="headerlink" href="#kfabrik-documentation" title="Permanent link">&para;</a></h1>
-<p>Welcome to the KFabrik documentation.</p>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>This documentation provides comprehensive information about KFabrik.</p>
+<p>Welcome to KFabrik, an open-source developer and CI tool that eliminates the complexity barrier in cloud-native AI development.</p>
+<h2 id="what-is-kfabrik">What is KFabrik?<a class="headerlink" href="#what-is-kfabrik" title="Permanent link">&para;</a></h2>
+<p>KFabrik enables developers to spin up complete, production-like CNCF AI stacks—including Kubernetes, KServe, Ray, vLLM, and vector databases—on their laptops or in CI pipelines in minutes instead of weeks.</p>
+<h2 id="the-problem-we-solve">The Problem We Solve<a class="headerlink" href="#the-problem-we-solve" title="Permanent link">&para;</a></h2>
+<p>Today's cloud-native AI platforms are a fragmented patchwork of specialized tools. While production-grade technologies like KServe, Ray, and vLLM exist, integrating them into a cohesive stack creates massive complexity. Organizations spend weeks wiring together Kubernetes, service meshes, model servers, vector databases, and observability tools—only to find that versions conflict, configurations break, and "it works on my laptop" becomes "it fails in CI."</p>
+<h2 id="our-solution">Our Solution<a class="headerlink" href="#our-solution" title="Permanent link">&para;</a></h2>
+<p>KFabrik provides pre-integrated, tested cloud-native AI stacks with:</p>
+<ul>
+<li><strong>Unified Integration</strong>: Compatible versions of KServe, Ray, vLLM, and vector databases that work together out-of-the-box</li>
+<li><strong>Fast Setup</strong>: Complete CNAI environments in 15-30 minutes instead of weeks</li>
+<li><strong>Reproducible Environments</strong>: Identical configurations across dev, CI, and production-like environments</li>
+<li><strong>Opinionated Defaults</strong>: Production-ready configurations based on CNCF best practices</li>
+<li><strong>Full Customization</strong>: Every aspect is configurable through declarative configuration files</li>
+</ul>
+<h2 id="core-components">Core Components<a class="headerlink" href="#core-components" title="Permanent link">&para;</a></h2>
+<p>KFabrik comprises three core components:</p>
+<ul>
+<li><strong>kfabric-bootstrap</strong>: Bootstraps complete, integrated CNAI stacks with a single command</li>
+<li><strong>kfabric-runtime</strong>: Orchestrates runtime wiring, health checks, and service discovery across components</li>
+<li><strong>kfabric-control</strong>: Provides declarative APIs for stack management and automation</li>
+</ul>
+<h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">&para;</a></h2>
+<p>KFabrik is currently in early development. The software components (kfabric-bootstrap, kfabric-runtime, kfabric-control) will be released in the coming weeks. This documentation site is being prepared to support the upcoming launch.</p>
 <h2 id="quick-links">Quick Links<a class="headerlink" href="#quick-links" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="getting-started/">Getting Started</a></li>
-<li><a href="contributing/">Contributing</a></li>
+<li><a href="getting-started/">Getting Started</a> - Setup and installation guide (coming soon)</li>
+<li><a href="prfaq/">PRFAQ</a> - Detailed press release and FAQ</li>
+<li><a href="contributing/">Contributing</a> - How to contribute to the project</li>
 </ul>
+<h2 id="built-for-the-cncf-ecosystem">Built for the CNCF Ecosystem<a class="headerlink" href="#built-for-the-cncf-ecosystem" title="Permanent link">&para;</a></h2>
+<p>KFabrik is designed as a potential CNCF project, directly addressing the integration and cohesion gap identified in the CNCF AI landscape. Built on cloud-native principles with declarative configuration, reproducible builds, secure defaults, and zero vendor lock-in.</p>
 
 
 

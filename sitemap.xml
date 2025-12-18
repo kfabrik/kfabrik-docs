@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://kfabrik-docs.github.io/</loc>
+         <loc>https://kfabrik.io/</loc>
          <lastmod>2025-12-18</lastmod>
     </url>
     <url>
-         <loc>https://kfabrik-docs.github.io/contributing/</loc>
+         <loc>https://kfabrik.io/contributing/</loc>
          <lastmod>2025-12-18</lastmod>
     </url>
     <url>
-         <loc>https://kfabrik-docs.github.io/getting-started/</loc>
+         <loc>https://kfabrik.io/getting-started/</loc>
+         <lastmod>2025-12-18</lastmod>
+    </url>
+    <url>
+         <loc>https://kfabrik.io/prfaq/</loc>
          <lastmod>2025-12-18</lastmod>
     </url>
 </urlset>
