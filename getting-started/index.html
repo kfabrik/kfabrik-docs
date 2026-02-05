@@ -178,13 +178,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/kfabrik/minikube" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    minikube
+    kfabrik/minikube
   </div>
 </a>
       </div>
@@ -391,13 +391,13 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/kfabrik/minikube" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    minikube
+    kfabrik/minikube
   </div>
 </a>
     </div>
@@ -599,10 +599,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-minikube" class="md-nav__link">
+  <a href="#build-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install minikube
+        Build Requirements
       
     </span>
   </a>
@@ -610,10 +610,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-kfabrik-cli" class="md-nav__link">
+  <a href="#clone-and-build" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install kfabrik CLI
+        Clone and Build
       
     </span>
   </a>
@@ -1047,9 +1047,10 @@
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <h3 id="required-software">Required Software<a class="headerlink" href="#required-software" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>minikube</strong> v1.37.0 or later</li>
-<li><strong>kubectl</strong> (comes with minikube)</li>
+<li><strong>Go</strong> 1.21 or later (for building)</li>
+<li><strong>Make</strong> (for building)</li>
 <li><strong>Docker</strong> with NVIDIA Container Toolkit (for GPU support)</li>
+<li><strong>kubectl</strong> (installed automatically with minikube)</li>
 </ul>
 <h3 id="for-gpu-support-linux-only">For GPU Support (Linux only)<a class="headerlink" href="#for-gpu-support-linux-only" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1140,23 +1141,25 @@
 </tbody>
 </table>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<h3 id="install-minikube">Install minikube<a class="headerlink" href="#install-minikube" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Linux (x86_64)</span>
-curl<span class="w"> </span>-LO<span class="w"> </span>https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo<span class="w"> </span>install<span class="w"> </span>minikube-linux-amd64<span class="w"> </span>/usr/local/bin/minikube
+<p>KFabrik is distributed as a custom build of minikube. Clone the repository, build, and install.</p>
+<h3 id="build-requirements">Build Requirements<a class="headerlink" href="#build-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Go 1.21 or later</li>
+<li>Make</li>
+<li>Docker</li>
+</ul>
+<h3 id="clone-and-build">Clone and Build<a class="headerlink" href="#clone-and-build" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clone the kfabrik minikube repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/kfabrik/minikube.git
+<span class="nb">cd</span><span class="w"> </span>minikube
 
-<span class="c1"># macOS</span>
-brew<span class="w"> </span>install<span class="w"> </span>minikube
+<span class="c1"># Build minikube with kfabrik addons</span>
+make<span class="w"> </span>build
 
-<span class="c1"># Windows (PowerShell as Administrator)</span>
-winget<span class="w"> </span>install<span class="w"> </span>minikube
+<span class="c1"># Install kfabrik CLI and minikube</span>
+./scripts/install.sh
 </code></pre></div>
-<h3 id="install-kfabrik-cli">Install kfabrik CLI<a class="headerlink" href="#install-kfabrik-cli" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Download the latest release</span>
-curl<span class="w"> </span>-LO<span class="w"> </span>https://github.com/kfabrik/kfabrik/releases/latest/download/kfabrik-linux-amd64
-chmod<span class="w"> </span>+x<span class="w"> </span>kfabrik-linux-amd64
-sudo<span class="w"> </span>mv<span class="w"> </span>kfabrik-linux-amd64<span class="w"> </span>/usr/local/bin/kfabrik
-</code></pre></div>
+<p>The install script places both <code>minikube</code> and <code>kfabrik</code> binaries in <code>/usr/local/bin</code>.</p>
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <h3 id="1-start-the-cluster">1. Start the Cluster<a class="headerlink" href="#1-start-the-cluster" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Start with GPU support (auto-detected)</span>
@@ -1255,7 +1258,7 @@ Open http://localhost:3000 (Login: admin / admin)</p>
 </code></pre></div>
 Open http://localhost:9090</p>
 <h2 id="manual-addon-management">Manual Addon Management<a class="headerlink" href="#manual-addon-management" title="Permanent link">&para;</a></h2>
-<p>If you prefer to manage addons separately:</p>
+<p>If you prefer to manage addons separately (after building and installing):</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Start minikube with GPU support</span>
 minikube<span class="w"> </span>start<span class="w"> </span>--driver<span class="o">=</span>docker<span class="w"> </span>--memory<span class="o">=</span><span class="m">32768</span><span class="w"> </span>--cpus<span class="o">=</span><span class="m">8</span><span class="w"> </span>--gpus<span class="o">=</span>all
 
