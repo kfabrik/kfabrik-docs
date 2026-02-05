@@ -4,7 +4,9 @@ Welcome to KFabrik, an integrated platform for deploying and managing Large Lang
 
 ## What is KFabrik?
 
-KFabrik enables ML developers to deploy production-grade LLM inference servers on minikube with a single command. A typical deployment takes under 10 minutes and requires no manual configuration of Kubernetes resources, service mesh routing, or monitoring infrastructure.
+KFabrik enables ML developers to deploy LLM inference servers on minikube for local development and testing with a single command. A typical deployment takes under 10 minutes and requires no manual configuration of Kubernetes resources, service mesh routing, or monitoring infrastructure.
+
+> **Note:** KFabrik is designed for development and testing purposes only. It is not intended for production deployments.
 
 ## The Problem We Solve
 
@@ -13,7 +15,7 @@ ML developers face significant friction when testing LLM deployments locally:
 - **Configuration Burden**: Deploying a single model requires creating and maintaining dozens of Kubernetes manifests across multiple namespaces
 - **Dependency Management**: The ML serving stack has strict ordering requirements that frequently fail due to race conditions
 - **Observability Gap**: Understanding model performance requires correlating inference latency metrics with GPU utilization
-- **Reproducibility**: Development environments diverge from production when developers take shortcuts
+- **Reproducibility**: Development environments vary between team members, making it hard to share and reproduce issues
 
 KFabrik solves these problems by providing an opinionated, fully-integrated ML inference platform that deploys with a single command.
 
@@ -66,6 +68,16 @@ Deploys observability stack:
 ## Quick Start
 
 ```bash
+# Clone the custom minikube repository
+git clone https://github.com/kfabrik/minikube.git
+cd minikube
+
+# Build minikube with kfabrik addons
+make build
+
+# Install kfabrik CLI and minikube
+./scripts/install.sh
+
 # Start cluster with GPU support
 kfabrik cluster start
 
@@ -87,7 +99,7 @@ kfabrik cluster stop
 
 **Simplicity over flexibility**: Optimized for the common case of deploying HuggingFace models on GPU-enabled minikube clusters.
 
-**Production parity**: Local deployments mirror production configurations using the same KServe InferenceService specifications and Istio routing rules.
+**Consistent environments**: All developers get identical local configurations using standard KServe InferenceService specifications and Istio routing rules.
 
 **Explicit over implicit**: All configuration is visible and auditable. Standard Kubernetes resources that can be inspected, modified, and versioned.
 

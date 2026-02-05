@@ -4,7 +4,9 @@ Documentation for KFabrik, an integrated platform for deploying and managing Lar
 
 ## About KFabrik
 
-KFabrik enables ML developers to deploy production-grade LLM inference servers on minikube with a single command. A typical deployment takes under 10 minutes and requires no manual configuration of Kubernetes resources, service mesh routing, or monitoring infrastructure.
+KFabrik enables ML developers to deploy LLM inference servers on minikube for local development and testing with a single command. A typical deployment takes under 10 minutes and requires no manual configuration of Kubernetes resources, service mesh routing, or monitoring infrastructure.
+
+> **Note:** KFabrik is designed for development and testing purposes only. It is not intended for production deployments.
 
 The platform consists of:
 
@@ -16,6 +18,13 @@ The platform consists of:
 ## Quick Start
 
 ```bash
+# Clone and build
+git clone https://github.com/kfabrik/minikube.git
+cd minikube
+make build
+./scripts/install.sh
+
+# Start and use
 kfabrik cluster start
 kfabrik deploy --models qwen-small --wait
 kfabrik query --model qwen-small --prompt "What is Kubernetes?"

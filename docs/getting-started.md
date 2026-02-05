@@ -6,9 +6,10 @@ This guide walks you through setting up KFabrik and deploying your first LLM mod
 
 ### Required Software
 
-- **minikube** v1.37.0 or later
-- **kubectl** (comes with minikube)
+- **Go** 1.21 or later (for building)
+- **Make** (for building)
 - **Docker** with NVIDIA Container Toolkit (for GPU support)
+- **kubectl** (installed automatically with minikube)
 
 ### For GPU Support (Linux only)
 
@@ -45,28 +46,29 @@ This guide walks you through setting up KFabrik and deploying your first LLM mod
 
 ## Installation
 
-### Install minikube
+KFabrik is distributed as a custom build of minikube. Clone the repository, build, and install.
+
+### Build Requirements
+
+- Go 1.21 or later
+- Make
+- Docker
+
+### Clone and Build
 
 ```bash
-# Linux (x86_64)
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+# Clone the kfabrik minikube repository
+git clone https://github.com/kfabrik/minikube.git
+cd minikube
 
-# macOS
-brew install minikube
+# Build minikube with kfabrik addons
+make build
 
-# Windows (PowerShell as Administrator)
-winget install minikube
+# Install kfabrik CLI and minikube
+./scripts/install.sh
 ```
 
-### Install kfabrik CLI
-
-```bash
-# Download the latest release
-curl -LO https://github.com/kfabrik/kfabrik/releases/latest/download/kfabrik-linux-amd64
-chmod +x kfabrik-linux-amd64
-sudo mv kfabrik-linux-amd64 /usr/local/bin/kfabrik
-```
+The install script places both `minikube` and `kfabrik` binaries in `/usr/local/bin`.
 
 ## Quick Start
 
@@ -207,7 +209,7 @@ Open http://localhost:9090
 
 ## Manual Addon Management
 
-If you prefer to manage addons separately:
+If you prefer to manage addons separately (after building and installing):
 
 ```bash
 # Start minikube with GPU support

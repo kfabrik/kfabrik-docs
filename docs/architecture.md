@@ -138,12 +138,9 @@ Phase 5: GPU Node Labeling
 
 ### Why RawDeployment Mode?
 
-KServe supports two deployment modes: Serverless (using Knative) and RawDeployment (using standard Kubernetes Deployments). KFabrik uses RawDeployment for several reasons:
+KServe supports two deployment modes: Serverless (using Knative) and RawDeployment (using standard Kubernetes Deployments). KFabrik currently uses RawDeployment for simplicity—it's easier to set up, debug, and operate for local development.
 
-1. Knative adds significant complexity and resource overhead
-2. Scale-to-zero provides minimal benefit for GPU workloads (GPU allocation is not elastic)
-3. Cold-start latency from scale-to-zero degrades user experience
-4. RawDeployment mode is simpler to debug and operate
+Knative support is planned for a future release.
 
 ### Why Sequential Installation?
 

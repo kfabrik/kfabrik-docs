@@ -6,9 +6,9 @@
 
 ### KFabrik Launches Open-Source Platform for Local LLM Development on Kubernetes
 
-**Minikube addons and CLI enable production-grade LLM deployment in under 10 minutes**
+**Minikube addons and CLI enable local LLM development environments in under 10 minutes**
 
-**TAMPA, FL — February 2026** — The KFabrik project today announced the release of its open-source platform for deploying and managing Large Language Models (LLMs) on local Kubernetes clusters. KFabrik enables ML developers to deploy production-grade LLM inference servers on minikube with a single command, eliminating weeks of manual configuration.
+**TAMPA, FL — February 2026** — The KFabrik project today announced the release of its open-source platform for local development and testing of Large Language Models (LLMs) on Kubernetes. KFabrik enables ML developers to deploy LLM inference servers on minikube for development purposes with a single command, eliminating weeks of manual configuration.
 
 **The Problem: Infrastructure Friction Slows ML Development**
 
@@ -22,7 +22,7 @@ The ML serving stack has strict ordering requirements. Cert-manager must be oper
 
 **The Solution: Integrated ML Inference Platform**
 
-KFabrik solves these problems by providing an opinionated, fully-integrated ML inference platform that deploys with a single command while maintaining production-grade configuration standards.
+KFabrik solves these problems by providing an opinionated, fully-integrated ML inference platform for local development that deploys with a single command.
 
 The platform consists of three minikube addons and a command-line interface:
 
@@ -41,9 +41,9 @@ kfabrik deploy --models qwen-small --wait
 kfabrik query --model qwen-small --prompt "What is Kubernetes?"
 ```
 
-A typical deployment takes under 10 minutes. The same InferenceService specifications, Istio routing rules, and Prometheus metrics that work locally will behave identically when promoted to production.
+A typical deployment takes under 10 minutes. The consistent local environment means all team members work with identical configurations, making it easy to share and reproduce issues.
 
-"KFabrik transformed our team's workflow," said an early adopter. "Junior ML engineers who previously needed weeks of Kubernetes training can now deploy and test models in their first hour. The production parity means we catch integration issues locally instead of in production."
+"KFabrik transformed our team's workflow," said an early adopter. "Junior ML engineers who previously needed weeks of Kubernetes training can now deploy and test models in their first hour. The consistent local setup means everyone on the team has the same development environment."
 
 **Built for GPU-First Workflows**
 
@@ -60,17 +60,17 @@ KFabrik assumes GPU workloads are the primary use case. Resource defaults are tu
 KFabrik follows five guiding tenets:
 
 1. **Simplicity over flexibility**: Optimized for the common case of deploying HuggingFace models on GPU-enabled minikube clusters
-2. **Production parity**: Local deployments mirror production configurations
+2. **Consistent environments**: All developers get identical local configurations
 3. **Explicit over implicit**: All configuration is visible and auditable as standard Kubernetes resources
 4. **Fast feedback**: Parallel installations, aggressive health checks, and clear progress reporting
 5. **GPU-first**: Design decisions favor GPU scheduling efficiency
 
 **Availability**
 
-KFabrik is available now under the Apache 2.0 license. The addons are distributed with minikube, and the CLI is available for Linux, macOS, and Windows.
+KFabrik is available now under the Apache 2.0 license. It is distributed as a custom build of minikube available at [github.com/kfabrik/minikube](https://github.com/kfabrik/minikube).
 
 - Documentation: [kfabrik.io](https://kfabrik.io)
-- Issues: [github.com/kubernetes/minikube](https://github.com/kubernetes/minikube) (label: addon/kfabrik)
+- Source: [github.com/kfabrik/minikube](https://github.com/kfabrik/minikube)
 
 ---
 
@@ -84,7 +84,7 @@ A: KFabrik is an integrated platform for deploying and managing Large Language M
 
 **Q: Who is KFabrik for?**
 
-A: KFabrik targets ML developers who need to test LLM deployments locally before promoting to production. This includes:
+A: KFabrik targets ML developers who need to experiment with and test LLM deployments locally. This includes:
 
 1. **ML Engineers**: Building and testing inference pipelines
 2. **Data Scientists**: Experimenting with different models locally
@@ -98,7 +98,7 @@ A: KFabrik eliminates the infrastructure friction in local ML development:
 - **Configuration burden**: Dozens of Kubernetes manifests reduced to a single command
 - **Dependency management**: Correct installation order handled automatically
 - **Observability gap**: GPU metrics and model performance monitoring included
-- **Reproducibility**: Production-grade configurations that work identically everywhere
+- **Reproducibility**: Consistent configurations that work identically across all developer machines
 
 ### Technical Questions
 
@@ -164,12 +164,9 @@ A: The `kfabrik query` command:
 
 **Q: Why does KFabrik use RawDeployment mode instead of Knative?**
 
-A: KServe supports two deployment modes. KFabrik uses RawDeployment (standard Kubernetes Deployments) because:
+A: KServe supports two deployment modes: Serverless (using Knative) and RawDeployment (using standard Kubernetes Deployments). KFabrik currently uses RawDeployment for simplicity—it's easier to set up, debug, and operate for local development.
 
-1. Knative adds significant complexity and resource overhead
-2. Scale-to-zero provides minimal benefit for GPU workloads
-3. Cold-start latency degrades user experience
-4. RawDeployment is simpler to debug and operate
+Knative support is planned for a future release.
 
 ### Operations Questions
 
@@ -215,7 +212,7 @@ kubectl port-forward -n monitoring svc/prometheus 9090:9090
 
 **Q: Can I use KFabrik for production?**
 
-A: KFabrik is designed for local development and testing. The configurations are production-grade, but production deployments should use appropriate tooling for multi-node clusters, high availability, and enterprise operations. KFabrik configurations can be exported and adapted for production using GitOps tools like Flux or ArgoCD.
+A: No. KFabrik is designed exclusively for local development and testing. It should not be used for production deployments. For production workloads, use appropriate tooling designed for multi-node clusters, high availability, and enterprise operations.
 
 ### Comparison Questions
 
@@ -249,7 +246,7 @@ A: Minikube addons provide:
 1. **Dependency management**: Addons can declare dependencies on other addons
 2. **Lifecycle integration**: Enable/disable with standard minikube commands
 3. **GPU support**: Minikube handles GPU passthrough configuration
-4. **Community distribution**: Addons are distributed with minikube releases
+4. **Familiar tooling**: Developers already know minikube workflows
 
 ---
 

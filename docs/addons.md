@@ -78,7 +78,7 @@ data:
 
 **Helm-Based Installation:** Uses a Job-based installer that runs Helm charts rather than static YAML manifests. This provides version pinning, configuration management, and upgrade capabilities.
 
-**RawDeployment Mode:** KServe is configured for RawDeployment mode (standard Kubernetes Deployments) rather than Serverless mode (Knative). This reduces complexity, lowers resource overhead, and provides faster cold-start times for GPU workloads.
+**RawDeployment Mode:** KServe is configured for RawDeployment mode (standard Kubernetes Deployments) rather than Serverless mode (Knative). This simplifies setup, debugging, and operation for local development. Knative support is planned for a future release.
 
 **Job-Based Installer:** A Kubernetes Job orchestrates sequential installation of components with proper dependency ordering. The job self-cleans after 5 minutes (TTL).
 

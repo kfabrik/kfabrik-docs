@@ -35,7 +35,7 @@ KFabrik complements these projects by:
 KFabrik can deploy models that are served by KServe, providing a simplified interface for model deployment and management.
 
 ### With vLLM
-Use KFabrik to orchestrate vLLM deployments for high-performance LLM serving across multiple environments.
+Use KFabrik to orchestrate vLLM deployments for high-performance LLM serving in local development environments.
 
 ### With Karmada
 Leverage Karmada's multi-cluster capabilities to distribute KFabrik-managed AI workloads across different regions or cloud providers.
