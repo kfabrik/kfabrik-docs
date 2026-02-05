@@ -6,12 +6,14 @@ The KFabrik addon suite provides a complete machine learning inference platform 
 
 The suite consists of three addons that work together:
 
-```
-kfabrik-bootstrap (required first)
-       │
-       ├──► kfabrik-model (optional, for LLM deployment)
-       │
-       └──► kfabrik-monitoring (optional, for observability)
+```mermaid
+flowchart LR
+    bootstrap["kfabrik-bootstrap<br/>(required first)"]
+    model["kfabrik-model<br/>(optional)"]
+    monitoring["kfabrik-monitoring<br/>(optional)"]
+
+    bootstrap --> model
+    bootstrap --> monitoring
 ```
 
 The kfabrik-bootstrap addon must be enabled first as it provides the core infrastructure (KServe, Istio) that other addons depend on.
@@ -24,12 +26,12 @@ The foundation addon that installs all core infrastructure components required f
 
 ### Components
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| Cert Manager | v1.16.1 | TLS certificate lifecycle management |
-| Istio | v1.22.0 | Service mesh for traffic and security |
-| KServe | v0.15.0 | Kubernetes-native ML model serving |
-| NVIDIA Device Plugin | v0.14.1 | GPU resource discovery and allocation |
+| Component | Purpose |
+|-----------|---------|
+| Cert Manager | TLS certificate lifecycle management |
+| Istio | Service mesh for traffic and security |
+| KServe | Kubernetes-native ML model serving |
+| NVIDIA Device Plugin | GPU resource discovery and allocation |
 
 ### Installation
 
@@ -66,9 +68,6 @@ metadata:
   name: kfabrik-bootstrap-config
   namespace: kserve
 data:
-  CERT_MANAGER_VERSION: "v1.16.1"
-  ISTIO_VERSION: "1.22.0"
-  KSERVE_VERSION: "v0.15.0"
   INSTALL_CERT_MANAGER: "true"
   INSTALL_ISTIO: "true"
   INSTALL_KSERVE: "true"
@@ -227,11 +226,11 @@ Provides a complete observability stack for monitoring ML inference workloads, i
 
 ### Components
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| Prometheus | v2.51.0 | Metrics collection and storage |
-| Grafana | 10.4.0 | Visualization and dashboards |
-| DCGM Exporter | 4.5.1 | NVIDIA GPU metrics exporter |
+| Component | Purpose |
+|-----------|---------|
+| Prometheus | Metrics collection and storage |
+| Grafana | Visualization and dashboards |
+| DCGM Exporter | NVIDIA GPU metrics exporter |
 
 ### Installation
 
@@ -258,9 +257,6 @@ metadata:
   name: kfabrik-monitoring-config
   namespace: monitoring
 data:
-  PROMETHEUS_VERSION: "v2.51.0"
-  GRAFANA_VERSION: "10.4.0"
-  DCGM_EXPORTER_VERSION: "4.5.1-4.8.0"
   PROMETHEUS_RETENTION: "15d"
   PROMETHEUS_STORAGE_SIZE: "10Gi"
   GRAFANA_ADMIN_USER: "admin"
@@ -411,14 +407,6 @@ minikube start --gpus=all
 ```
 
 ---
-
-## Version Compatibility
-
-| minikube | Kubernetes | Cert Manager | Istio | KServe | Status |
-|----------|------------|--------------|-------|--------|--------|
-| 1.37.x | 1.28-1.32 | v1.16.1 | 1.22.0 | v0.15.0 | Tested |
-| 1.36.x | 1.28-1.31 | v1.16.1 | 1.22.0 | v0.15.0 | Untested |
-| < 1.36 | < 1.28 | - | - | - | Not supported |
 
 ---
 

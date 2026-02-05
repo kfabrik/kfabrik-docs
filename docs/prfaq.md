@@ -110,21 +110,21 @@ A: Minimum requirements:
 - RAM: 8GB (16-32GB recommended for GPU workloads)
 - Disk: 40GB
 - GPU: NVIDIA GPU with 6GB+ VRAM (optional but recommended)
-- OS: Linux (full GPU support), macOS or Windows (CPU-only)
+- OS: Linux (macOS and Windows support coming soon)
 
 **Q: What components does KFabrik install?**
 
 A: KFabrik installs the following components:
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| Cert-Manager | v1.16.1 | TLS certificate management |
-| Istio | v1.22.0 | Service mesh and ingress |
-| KServe | v0.15.0 | Model serving platform |
-| NVIDIA Device Plugin | v0.14.1 | GPU resource scheduling |
-| Prometheus | v2.51.0 | Metrics collection |
-| Grafana | v10.4.0 | Visualization |
-| DCGM Exporter | v4.5.1 | GPU metrics |
+| Component | Purpose |
+|-----------|---------|
+| Cert-Manager | TLS certificate management |
+| Istio | Service mesh and ingress |
+| KServe | Model serving platform |
+| NVIDIA Device Plugin | GPU resource scheduling |
+| Prometheus | Metrics collection |
+| Grafana | Visualization |
+| DCGM Exporter | GPU metrics |
 
 **Q: How does KFabrik handle GPU support?**
 
@@ -132,8 +132,8 @@ A: KFabrik automatically detects GPU availability and configures the cluster acc
 
 - Linux with NVIDIA GPU: Full GPU acceleration (default)
 - Linux without GPU: CPU-only mode (auto-detected)
-- macOS: CPU-only mode (automatic)
-- Windows: CPU-only mode (automatic)
+- macOS: Coming soon
+- Windows: Coming soon
 
 The `--cpu-only` flag can force CPU-only mode even when a GPU is available.
 

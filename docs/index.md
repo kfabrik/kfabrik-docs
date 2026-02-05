@@ -36,12 +36,12 @@ Command-line interface for model deployment, querying, and management. Provides 
 
 Installs foundational infrastructure:
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| Cert-Manager | v1.16.1 | TLS certificate management |
-| Istio | v1.22.0 | Service mesh and ingress routing |
-| KServe | v0.15.0 | Model serving platform |
-| NVIDIA Device Plugin | v0.14.1 | GPU resource scheduling |
+| Component | Purpose |
+|-----------|---------|
+| Cert-Manager | TLS certificate management |
+| Istio | Service mesh and ingress routing |
+| KServe | Model serving platform |
+| NVIDIA Device Plugin | GPU resource scheduling |
 
 ### kfabrik-model Addon
 
@@ -59,11 +59,11 @@ Provides pre-configured model definitions optimized for consumer GPUs (6GB VRAM)
 
 Deploys observability stack:
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| Prometheus | v2.51.0 | Metrics collection |
-| Grafana | v10.4.0 | Visualization |
-| DCGM Exporter | v4.5.1 | GPU metrics |
+| Component | Purpose |
+|-----------|---------|
+| Prometheus | Metrics collection |
+| Grafana | Visualization |
+| DCGM Exporter | GPU metrics |
 
 ## Quick Start
 

@@ -22,8 +22,8 @@ This guide walks you through setting up KFabrik and deploying your first LLM mod
 |----------|-------------|-------|
 | Linux with NVIDIA GPU | Full | Default configuration |
 | Linux without GPU | CPU-only | Auto-detected |
-| macOS | CPU-only | Automatic |
-| Windows | CPU-only | Requires WSL2 |
+| macOS | Coming soon | |
+| Windows | Coming soon | |
 
 ## System Requirements
 

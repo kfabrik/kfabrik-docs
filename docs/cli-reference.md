@@ -47,7 +47,7 @@ kfabrik cluster start [FLAGS]
 # Start with GPU (auto-detected)
 kfabrik cluster start
 
-# Start in CPU-only mode (works on macOS)
+# Start in CPU-only mode
 kfabrik cluster start --cpu-only
 
 # Start with custom resources
