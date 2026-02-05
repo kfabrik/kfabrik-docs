@@ -1,14 +1,17 @@
 site_name: KFabrik Documentation
-site_description: Open-source tool to democratize cloud-native AI development
+site_description: Integrated platform for deploying and managing LLMs on Kubernetes
 site_url: https://kfabrik.io/
-repo_url: https://github.com/kserve
-repo_name: kserve
+repo_url: https://github.com/kubernetes/minikube
+repo_name: minikube
 
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - CNCF Landscape: cncf-landscape.md
+  - CLI Reference: cli-reference.md
+  - Architecture: architecture.md
+  - Addons: addons.md
   - PRFAQ: prfaq.md
+  - CNCF Landscape: cncf-landscape.md
   - Contributing: contributing.md
 
 theme:
@@ -21,12 +24,15 @@ theme:
     - navigation.tabs
     - navigation.sections
     - toc.integrate
+    - content.code.copy
 
 markdown_extensions:
   - admonition
   - codehilite
   - toc:
       permalink: true
+  - tables
+  - pymdownx.superfences
 
 plugins:
   - search

@@ -4,51 +4,73 @@
 
 ## PRESS RELEASE
 
-### KFabrik Launches Open-Source Tool to Democratize Cloud-Native AI Development
+### KFabrik Launches Open-Source Platform for Local LLM Development on Kubernetes
 
-**Developer and CI tool eliminates weeks of setup, delivers production-like CNCF AI stacks in minutes**
+**Minikube addons and CLI enable production-grade LLM deployment in under 10 minutes**
 
-**TAMPA, FL — January 31, 2026** — The KFabrik project today announced the release of its open-source developer and continuous integration (CI) tool designed to eliminate the complexity barrier preventing teams from building and testing cloud-native AI applications. KFabrik enables developers to spin up complete, production-like CNCF AI stacks—including Kubernetes, KServe, Ray, vLLM, and vector databases—on their laptops or in CI pipelines in minutes instead of weeks.
+**TAMPA, FL — February 2026** — The KFabrik project today announced the release of its open-source platform for deploying and managing Large Language Models (LLMs) on local Kubernetes clusters. KFabrik enables ML developers to deploy production-grade LLM inference servers on minikube with a single command, eliminating weeks of manual configuration.
 
-**The Problem: A Patchwork of Tools Creates Complexity and Risk**
+**The Problem: Infrastructure Friction Slows ML Development**
 
-Today's cloud-native AI platforms are a fragmented patchwork of specialized tools. While production-grade technologies like KServe, Ray, and vLLM exist, integrating them into a cohesive stack creates massive complexity. Organizations spend weeks wiring together Kubernetes, service meshes, model servers, vector databases, and observability tools—only to find that versions conflict, configurations break, and "it works on my laptop" becomes "it fails in CI."
+ML developers face significant friction when testing LLM deployments locally. The current state requires manual installation and configuration of multiple interdependent components: container runtimes with GPU support, Kubernetes clusters, service mesh infrastructure, model serving frameworks, and monitoring stacks.
 
-This fragmentation means higher complexity and risk. Data scientists develop locally with small datasets, then distributed systems engineers rewrite code for production Kubernetes deployments. Teams lack standard, tested configurations and spend engineering cycles solving the same integration problems independently. Without a unified approach, the learning curve is steep, requiring expertise in both ML and cloud-native infrastructure.
+Deploying a single model requires creating and maintaining dozens of Kubernetes manifests across multiple namespaces. Developers must understand the intricacies of KServe InferenceServices, Istio VirtualServices, Prometheus scrape configurations, and GPU resource scheduling.
 
-"We saw talented teams spending 40% of their sprint cycles fighting tool integration instead of building AI features," said a KFabrik contributor. "Every project started from scratch—figuring out which KServe version works with which Istio release, how to wire Ray to vector databases, how to get vLLM serving working locally. The CNCF ecosystem provides incredible building blocks, but assembling them is still artisanal, error-prone work."
+The ML serving stack has strict ordering requirements. Cert-manager must be operational before Istio can create TLS certificates. Istio must be running before KServe can configure ingress routing. NVIDIA device plugins must register GPUs before model pods can request GPU resources. Manual installation frequently fails due to race conditions or missing prerequisites.
 
-**The Solution: Unified, Tested CNAI Stacks**
+"We saw talented ML engineers spending days configuring infrastructure instead of building AI applications," said a KFabrik contributor. "Every project required the same tedious setup: installing Cert-Manager, then Istio, then KServe, then debugging why they don't work together. KFabrik eliminates this entirely."
 
-KFabrik solves the integration and cohesion problem by providing pre-integrated, tested cloud-native AI stacks. Instead of assembling KServe, Ray, vLLM, and vector databases independently, developers get working, compatible configurations in one command. KFabrik handles version compatibility, component wiring, and infrastructure dependencies—eliminating weeks of integration work.
+**The Solution: Integrated ML Inference Platform**
 
-Built as a unified reference implementation of CNCF AI patterns, KFabrik provides opinionated defaults based on production best practices. Teams get standard pipeline specifications, common metadata schemas, and tested component compatibility (KServe with Istio/Knative, Ray with KubeRay operators, vLLM with model serving endpoints). Local development environments match CI environments, which mirror production topologies.
+KFabrik solves these problems by providing an opinionated, fully-integrated ML inference platform that deploys with a single command while maintaining production-grade configuration standards.
 
-The project comprises three core components:
+The platform consists of three minikube addons and a command-line interface:
 
-- **kfabric-bootstrap**: Bootstraps complete, integrated CNAI stacks with a single command. Handles dependency resolution, version compatibility testing, and configuration for Kubernetes, KServe, Ray, vLLM, vector databases, and supporting infrastructure. Uses tested, locked versions that work together.
-
-- **kfabric-runtime**: Orchestrates runtime wiring, health checks, and service discovery across components. Ensures KServe can talk to vector databases, Ray clusters integrate with model serving, and observability captures metrics from all layers. Provides fast feedback when integration breaks.
-
-- **kfabric-control**: Provides declarative APIs for stack management and automation. Enables teams to version-control entire AI infrastructure as code, with profiles for different integration patterns (inference-only, RAG, distributed training, etc.).
+- **kfabrik-bootstrap**: Installs Cert-Manager, Istio, KServe, and NVIDIA Device Plugin in the correct dependency order
+- **kfabrik-model**: Provides pre-configured LLM definitions optimized for consumer GPUs (6GB VRAM)
+- **kfabrik-monitoring**: Deploys Prometheus, Grafana, and GPU metrics with DCGM Exporter
+- **kfabrik CLI**: Provides commands for cluster management, model deployment, and inference queries
 
 **How It Works**
 
-Developers run a single command specifying their desired stack profile. KFabrik downloads, configures, and validates all components, bringing up a fully functional CNAI environment ready for model development and testing. The same configuration runs identically in GitHub Actions, GitLab CI, or Jenkins, enabling teams to validate AI workloads before production deployment.
+Developers run a single command to start a GPU-enabled cluster with the complete ML serving stack:
 
-"KFabrik transformed our workflow," said an early adopter from a financial services firm. "We went from three weeks to set up a KServe environment to 15 minutes. Our data scientists now test models locally with the exact same infrastructure our platform runs in production. Integration bugs dropped by 70%."
+```bash
+kfabrik cluster start
+kfabrik deploy --models qwen-small --wait
+kfabrik query --model qwen-small --prompt "What is Kubernetes?"
+```
 
-**Built for the CNCF Ecosystem**
+A typical deployment takes under 10 minutes. The same InferenceService specifications, Istio routing rules, and Prometheus metrics that work locally will behave identically when promoted to production.
 
-KFabrik is designed as a potential CNCF project, directly addressing the integration and cohesion gap identified in the CNCF AI landscape. As the CNCF AI whitepaper recommends, "the community should continue to identify overlaps and consolidate efforts (for example, aligning KServe, Kubeflow Pipelines, and other pieces under compatible versions and interfaces)." KFabrik does exactly this—providing a unified reference stack that aligns CNCF AI components under tested, compatible configurations.
+"KFabrik transformed our team's workflow," said an early adopter. "Junior ML engineers who previously needed weeks of Kubernetes training can now deploy and test models in their first hour. The production parity means we catch integration issues locally instead of in production."
 
-Built on cloud-native principles—declarative configuration, reproducible builds, secure defaults, and zero vendor lock-in—KFabrik leverages existing CNCF projects rather than replacing them. It provides standard pipeline specifications, common metadata schemas, and integration patterns that currently don't exist across the fragmented CNCF AI ecosystem.
+**Built for GPU-First Workflows**
 
-The project is available now under an open-source license at [github.com/kfabrik](https://github.com/kfabrik). Documentation, quickstart guides, and community support are available at [kfabrik.io](https://kfabrik.io).
+KFabrik assumes GPU workloads are the primary use case. Resource defaults are tuned for NVIDIA GPUs with 6GB+ VRAM. Five pre-configured models are included:
 
-**About KFabrik**
+- **qwen-small** (0.5B parameters, ~1GB VRAM) - Quick testing
+- **qwen-medium** (1.5B parameters, ~3GB VRAM) - Balanced performance
+- **tinyllama** (1.1B parameters, ~2.5GB VRAM) - Lightweight inference
+- **smollm2** (1.7B parameters, ~3.5GB VRAM) - Efficient small model
+- **phi2** (2.7B parameters, ~5.5GB VRAM) - Higher quality output
 
-KFabrik is an open-source project dedicated to solving the integration and cohesion problem in cloud-native AI. By providing unified, tested CNAI stacks, KFabrik makes CNCF AI technologies accessible to every developer. Teams get working integrations of KServe, Ray, vLLM, and vector databases instead of spending weeks on manual compatibility testing and configuration. KFabrik accelerates AI innovation by eliminating the fragmentation tax that currently slows CNAI adoption.
+**Design Principles**
+
+KFabrik follows five guiding tenets:
+
+1. **Simplicity over flexibility**: Optimized for the common case of deploying HuggingFace models on GPU-enabled minikube clusters
+2. **Production parity**: Local deployments mirror production configurations
+3. **Explicit over implicit**: All configuration is visible and auditable as standard Kubernetes resources
+4. **Fast feedback**: Parallel installations, aggressive health checks, and clear progress reporting
+5. **GPU-first**: Design decisions favor GPU scheduling efficiency
+
+**Availability**
+
+KFabrik is available now under the Apache 2.0 license. The addons are distributed with minikube, and the CLI is available for Linux, macOS, and Windows.
+
+- Documentation: [kfabrik.io](https://kfabrik.io)
+- Issues: [github.com/kubernetes/minikube](https://github.com/kubernetes/minikube) (label: addon/kfabrik)
 
 ---
 
@@ -58,315 +80,179 @@ KFabrik is an open-source project dedicated to solving the integration and cohes
 
 **Q: What is KFabrik?**
 
-A: KFabrik is an open-source developer and CI tool that provides deterministic, reproducible deployment of complete cloud-native AI (CNAI) stacks. It enables developers to spin up production-like environments containing Kubernetes, KServe, Ray, vLLM, vector databases, and other CNCF AI technologies in minutes rather than weeks. KFabrik is designed specifically for local development and CI/CD testing workflows, not production deployment.
-
-**Q: Why does this problem need solving?**
-
-A: The CNCF cloud-native AI ecosystem suffers from a critical integration and cohesion gap. As the CNCF AI whitepaper states: "Today's AI platforms are a patchwork of specialized tools. This fragmentation means higher complexity and risk. A unified cloud-native AI platform or reference stack could greatly simplify adoption."
-
-While production-grade technologies like KServe, Ray, and vLLM exist, each project has its own installer, versioning, and configuration patterns. Integrating them requires manual wiring and compatibility testing—work that every team duplicates independently. There are no standard pipeline specifications or common metadata schemas across CNCF AI projects. Teams waste weeks solving version conflicts (does KServe 0.11 work with Istio 1.19?), integration challenges (how do I wire Ray to a vector database?), and environment mismatches.
-
-According to CNCF research, "data scientists develop their ML Python scripts with small datasets locally, and then distributed systems engineers rewrite these scripts for distributed execution"—a costly, error-prone process. The ecosystem needs what Kubernetes provides for container orchestration: a cohesive base that "fills the gap" and creates a unified MLOps experience. KFabrik directly addresses this by providing tested, integrated stacks so teams can focus on AI features instead of infrastructure plumbing.
+A: KFabrik is an integrated platform for deploying and managing Large Language Models (LLMs) on local Kubernetes clusters. It consists of three minikube addons (kfabrik-bootstrap, kfabrik-model, kfabrik-monitoring) and a command-line interface (kfabrik CLI) that together provide a complete ML inference stack optimized for GPU workloads.
 
 **Q: Who is KFabrik for?**
 
-A: KFabrik targets three primary audiences:
+A: KFabrik targets ML developers who need to test LLM deployments locally before promoting to production. This includes:
 
-1. **AI/ML Developers and Data Scientists**: Those building AI applications who need local environments to develop and test models with KServe, Ray, or vLLM without waiting for shared infrastructure.
+1. **ML Engineers**: Building and testing inference pipelines
+2. **Data Scientists**: Experimenting with different models locally
+3. **Platform Engineers**: Developing CI/CD pipelines for ML workloads
+4. **Developers**: Integrating LLM capabilities into applications
 
-2. **Platform and DevOps Engineers**: Teams responsible for building and maintaining CI/CD pipelines for AI workloads who need reliable, reproducible test environments.
+**Q: What problem does KFabrik solve?**
 
-3. **Organizations Adopting CNCF AI Technologies**: Companies evaluating or migrating to cloud-native AI stacks who need fast proof-of-concept environments and developer onboarding tools.
+A: KFabrik eliminates the infrastructure friction in local ML development:
 
-**Q: What problem does KFabrik solve that existing tools don't?**
-
-A: KFabrik solves the **integration and cohesion gap** that existing tools don't address:
-
-**Individual project installers**: Each CNCF project (KServe, KubeRay, vector databases) has its own installer, but they don't provide tested integration. You can install KServe and Ray independently, but wiring them together—ensuring compatible versions, configuring networking, setting up service discovery—requires weeks of manual work and tribal knowledge.
-
-**Manual integration approaches**: Organizations spend engineering cycles solving the same problems: "Which KServe version works with Istio 1.19?" "How do I configure Ray to work with this vector database?" "Why does vLLM work locally but fail in CI?" Every team duplicates this integration effort independently. There's no standard reference stack.
-
-**Kubeflow**: Broader scope focused on the full ML lifecycle (training pipelines, hyperparameter tuning, notebooks). While comprehensive, it's complex to set up and heavier than needed for teams focused on inference/serving workflows. Kubeflow itself acknowledges the complexity problem.
-
-**Cloud provider managed services**: AWS SageMaker, Google Vertex AI provide integrated experiences but create vendor lock-in, don't support local development, and use proprietary APIs that differ from open CNCF standards.
-
-**What's missing**: A unified, tested reference implementation that integrates CNCF AI components with compatible versions and standard configurations. As the CNCF AI whitepaper notes, "a unified cloud-native AI platform or reference stack could greatly simplify adoption" and "the community should continue to identify overlaps and consolidate efforts (for example, aligning KServe, Kubeflow Pipelines, and other pieces under compatible versions and interfaces)."
-
-KFabrik fills this gap by providing opinionated, pre-integrated CNAI stacks purpose-built for developer and CI workflows. Instead of artisanal integration work, teams get tested, locked configurations that work across dev, CI, and prod-like environments.
-
-### Customer Questions
-
-**Q: How long does it take to get started with KFabrik?**
-
-A: A developer with Docker installed can have a complete KServe-based inference environment running locally in under 15 minutes. This includes Kubernetes (kind or k3s), KServe, Istio/Knative, and a sample model deployment. More complex stacks including Ray clusters and vector databases take 20-30 minutes depending on hardware and network speed. Compare this to the typical 2-4 weeks required for manual setup and integration testing.
-
-**Q: What if my production environment uses different versions or configurations?**
-
-A: KFabrik uses declarative configuration files that specify exact component versions, resource allocations, and integration settings. Teams can maintain multiple profiles (e.g., "dev-minimal", "ci-integration", "prod-mirror") and share them via version control. When production configurations change, updating the KFabrik profile ensures all developers and CI pipelines stay synchronized. This "infrastructure as code" approach eliminates environment drift.
-
-**Q: Can I customize the stack for my needs?**
-
-A: Yes. KFabrik provides opinionated defaults that work out-of-the-box, but every aspect is customizable through configuration files. You can:
-
-- Select specific versions of Kubernetes, KServe, Ray, etc.
-- Add or remove components (e.g., skip Ray if you only need KServe)
-- Configure resource limits, networking, and storage
-- Integrate custom operators or CRDs
-- Add organization-specific security policies or secrets management
-
-The philosophy is "opinionated defaults, unlimited flexibility."
-
-**Q: Does this work in air-gapped or regulated environments?**
-
-A: Yes. KFabrik is designed with air-gapped and regulated environments in mind. The bootstrap component supports:
-
-- Pre-cached container images and artifacts
-- Custom registry configuration
-- Offline installation bundles
-- Compliance-focused profiles with security hardening
-
-This makes KFabrik suitable for financial services, healthcare, government, and other regulated industries.
-
-**Q: What's the learning curve?**
-
-A: KFabrik significantly reduces the learning curve for CNAI adoption. Instead of mastering Kubernetes, Istio, Knative, KServe, Ray, and various operators independently, developers can start with a working stack and learn components incrementally. Documentation includes:
-
-- Quick-start guides for common use cases
-- Concept explanations for each component
-- Troubleshooting runbooks
-- Migration guides from manual setups
-
-Early adopters report that junior developers become productive with KServe-based development in days instead of weeks.
-
-**Q: How does KFabrik help with CI/CD?**
-
-A: KFabrik integrates directly into CI/CD pipelines (GitHub Actions, GitLab CI, Jenkins, etc.) by providing:
-
-- Containerized environments that start quickly in CI runners
-- Deterministic, cached builds for fast pipeline execution
-- Automated health checks to validate stack readiness
-- Test fixtures for common AI workload patterns
-
-Teams can run integration tests against real KServe endpoints, validate Ray job execution, or test vector database queries—all within their CI pipeline using the same configuration as local development.
+- **Configuration burden**: Dozens of Kubernetes manifests reduced to a single command
+- **Dependency management**: Correct installation order handled automatically
+- **Observability gap**: GPU metrics and model performance monitoring included
+- **Reproducibility**: Production-grade configurations that work identically everywhere
 
 ### Technical Questions
 
-**Q: What technologies does KFabrik include?**
-
-A: KFabrik provides integrated stacks built from CNCF and cloud-native ecosystem projects, including:
-
-- **Kubernetes**: Kind, k3s, or k3d for local clusters
-- **KServe**: Model serving platform with inference protocols
-- **Istio/Knative**: Service mesh and serverless components required by KServe
-- **Ray and KubeRay**: Distributed computing framework for AI workloads
-- **vLLM**: High-performance LLM inference engine
-- **Vector databases**: Milvus, Qdrant, or others for RAG patterns
-- **Storage**: MinIO or local storage providers
-- **Observability**: Optional Prometheus, Grafana, and Jaeger integration
-
-Component selection is configurable per stack profile.
-
 **Q: What are the system requirements?**
 
-A: Minimum requirements for basic KServe development:
+A: Minimum requirements:
 
-- **CPU**: 4 cores (8 recommended)
-- **RAM**: 8GB (16GB recommended)
-- **Disk**: 20GB free space
-- **OS**: Linux, macOS, or Windows with WSL2
-- **Software**: Docker or Podman
+- CPU: 4 cores (8 recommended)
+- RAM: 8GB (16-32GB recommended for GPU workloads)
+- Disk: 40GB
+- GPU: NVIDIA GPU with 6GB+ VRAM (optional but recommended)
+- OS: Linux (full GPU support), macOS or Windows (CPU-only)
 
-For Ray clusters or LLM serving, requirements increase:
+**Q: What components does KFabrik install?**
 
-- **CPU**: 8+ cores
-- **RAM**: 32GB+ (especially for vLLM with local models)
-- **GPU**: Optional but recommended for LLM inference testing
+A: KFabrik installs the following components:
 
-CI environments typically use 8-core runners with 16-32GB RAM.
+| Component | Version | Purpose |
+|-----------|---------|---------|
+| Cert-Manager | v1.16.1 | TLS certificate management |
+| Istio | v1.22.0 | Service mesh and ingress |
+| KServe | v0.15.0 | Model serving platform |
+| NVIDIA Device Plugin | v0.14.1 | GPU resource scheduling |
+| Prometheus | v2.51.0 | Metrics collection |
+| Grafana | v10.4.0 | Visualization |
+| DCGM Exporter | v4.5.1 | GPU metrics |
 
-**Q: How does KFabrik handle component integration and compatibility?**
+**Q: How does KFabrik handle GPU support?**
 
-A: KFabrik solves the integration problem through tested, locked configurations. Rather than hoping components work together, KFabrik provides:
+A: KFabrik automatically detects GPU availability and configures the cluster accordingly:
 
-**Version Lock Files**: Every stack profile specifies exact versions for all components (e.g., KServe 0.11.2, Istio 1.19.3, Ray 2.9.0). These combinations are tested together in CI to ensure compatibility. When KServe releases a new version, KFabrik maintainers test it against current Istio/Knative versions before updating lock files.
+- Linux with NVIDIA GPU: Full GPU acceleration (default)
+- Linux without GPU: CPU-only mode (auto-detected)
+- macOS: CPU-only mode (automatic)
+- Windows: CPU-only mode (automatic)
 
-**Integration Testing**: Automated tests validate that components wire together correctly—KServe can serve models, Ray clusters accept jobs, vector databases respond to queries, observability captures metrics from all layers. This catches integration breaks before users encounter them.
+The `--cpu-only` flag can force CPU-only mode even when a GPU is available.
 
-**Standard Configuration Patterns**: KFabrik provides tested configurations for common patterns:
-- **KServe + Istio/Knative**: Correct service mesh setup, ingress configuration, autoscaling policies
-- **Ray + KubeRay**: Proper operator installation, cluster CRDs, distributed computing setup
-- **vLLM + Model Serving**: GPU allocation, model weight management, inference endpoint configuration
-- **Vector DB integration**: Networking setup, persistent storage, query endpoint exposure
+**Q: What models are pre-configured?**
 
-**Runtime Wiring**: The kfabric-runtime component handles cross-component integration—ensuring KServe inference graphs can call vector databases for RAG, Ray jobs can access model registries, observability dashboards show metrics from all services.
+A: Five models optimized for consumer GPUs (6GB VRAM):
 
-This eliminates the "artisanal integration" problem where every team figures out compatibility independently. Teams get tested, working stacks and can focus on AI features instead of infrastructure debugging.
+| Model | Parameters | VRAM | Use Case |
+|-------|------------|------|----------|
+| qwen-small | 0.5B | ~1GB | Quick testing, low latency |
+| qwen-medium | 1.5B | ~3GB | Balanced performance |
+| tinyllama | 1.1B | ~2.5GB | Lightweight inference |
+| smollm2 | 1.7B | ~3.5GB | Efficient small model |
+| phi2 | 2.7B | ~5.5GB | Higher quality, more resources |
 
-**Q: How does KFabrik ensure reproducibility?**
+**Q: Can I use custom models?**
 
-A: KFabrik achieves reproducibility through:
+A: Yes. KFabrik supports any HuggingFace model. Create a custom configuration file specifying the model URI and resource requirements, then deploy with the CLI.
 
-1. **Version pinning**: Every component version is specified in lock files, similar to package managers like npm or cargo.
-2. **Declarative configuration**: Stack definitions are pure data, producing identical results on every run.
-3. **Idempotent operations**: Running bootstrap multiple times produces the same result; no hidden state.
-4. **Content-addressable artifacts**: Container images and binaries are verified by checksum.
-5. **Hermetic builds**: All dependencies are explicit; no reliance on system state.
+**Q: How does the query command work?**
 
-This ensures that "it works on my machine" actually means "it will work everywhere."
+A: The `kfabrik query` command:
 
-**Q: How does KFabrik handle updates and upgrades?**
+1. Sets up kubectl port-forwarding to the model's predictor service
+2. Sends an OpenAI-compatible chat completion request
+3. Displays the response with token usage statistics
+4. Cleans up the port-forward
 
-A: KFabrik separates stack definition from installation:
+**Q: Why does KFabrik use RawDeployment mode instead of Knative?**
 
-- **Stack profiles** define desired component versions
-- **Bootstrap** realizes the profile in a target environment
-- **Updates** are performed by modifying the profile and re-running bootstrap
+A: KServe supports two deployment modes. KFabrik uses RawDeployment (standard Kubernetes Deployments) because:
 
-This approach enables:
+1. Knative adds significant complexity and resource overhead
+2. Scale-to-zero provides minimal benefit for GPU workloads
+3. Cold-start latency degrades user experience
+4. RawDeployment is simpler to debug and operate
 
-- Testing updates in isolated environments before rolling out
-- Rolling back to previous configurations via version control
-- Progressive rollouts (update dev, then CI, then prod-mirror)
+### Operations Questions
 
-Component-level updates (e.g., upgrading just KServe) are supported without tearing down the entire stack.
+**Q: How long does deployment take?**
 
-**Q: What about production deployment?**
+A: A typical deployment takes under 10 minutes:
 
-A: KFabrik is explicitly scoped for development and CI workflows, not production deployment. However, the stack configurations KFabrik uses can inform production deployments via GitOps tools like Flux or ArgoCD. Teams typically:
+- Cluster start with addons: ~5-7 minutes
+- Model deployment (first time): ~3-5 minutes (includes model download)
+- Model deployment (cached): ~1-2 minutes
 
-1. Use KFabrik for local development and CI testing
-2. Extract validated configurations as Helm charts or Kustomize overlays
-3. Deploy to production using enterprise-grade GitOps tooling
+**Q: How do I troubleshoot deployment issues?**
 
-This separation of concerns ensures KFabrik stays focused on developer productivity while production deployments use appropriate tooling for scale, multi-tenancy, and operational requirements.
+A: Use the following commands:
 
-**Q: How does this integrate with existing Kubernetes clusters?**
+```bash
+# Check installer progress
+kubectl get jobs -n kserve
+kubectl logs -n kserve -l job-name=kfabrik-installer
 
-A: KFabrik can work in two modes:
+# Check model status
+kfabrik status --model <name>
+kfabrik logs --model <name>
 
-1. **Standalone**: Creates a new local Kubernetes cluster (kind/k3s) with the CNAI stack
-2. **Cluster mode**: Installs CNAI components into an existing Kubernetes cluster
+# Check KServe controller
+kubectl logs -n kserve -l control-plane=kserve-controller-manager
 
-Cluster mode is useful for shared development clusters or testing against specific Kubernetes distributions. Safety checks prevent accidental installation on production clusters.
+# Verify GPU detection
+kubectl describe node minikube | grep nvidia.com/gpu
+```
 
-### Business and Strategic Questions
+**Q: How do I access monitoring dashboards?**
 
-**Q: What's the licensing model?**
+A: Use kubectl port-forward:
 
-A: KFabrik is fully open-source under the Apache 2.0 license, consistent with CNCF project requirements. There are no proprietary components, no commercial versions, and no vendor lock-in. Organizations can use, modify, and distribute KFabrik freely.
+```bash
+# Grafana (login: admin/admin)
+kubectl port-forward -n monitoring svc/grafana 3000:3000
 
-**Q: Why are you pursuing CNCF project status?**
+# Prometheus
+kubectl port-forward -n monitoring svc/prometheus 9090:9090
+```
 
-A: CNCF provides the ideal home for KFabrik because:
+**Q: Can I use KFabrik for production?**
 
-1. **Addressing a CNCF-identified gap**: The CNCF AI whitepaper explicitly identifies the integration and cohesion problem—"Today's AI platforms are a patchwork of specialized tools" and recommends "a unified cloud-native AI platform or reference stack." KFabrik directly addresses this need.
+A: KFabrik is designed for local development and testing. The configurations are production-grade, but production deployments should use appropriate tooling for multi-node clusters, high availability, and enterprise operations. KFabrik configurations can be exported and adapted for production using GitOps tools like Flux or ArgoCD.
 
-2. **Alignment**: KFabrik exists to integrate and unify CNCF AI projects (KServe, KubeRay, vector databases), making them accessible as a cohesive stack rather than isolated tools.
+### Comparison Questions
 
-3. **Neutrality**: CNCF's vendor-neutral governance prevents any single company from controlling integration standards. A neutral integration layer is critical for ecosystem adoption.
+**Q: How does KFabrik compare to deploying KServe manually?**
 
-4. **Cross-project coordination**: As a CNCF project, KFabrik can work directly with KServe, Kubeflow, and other CNCF AI projects to "identify overlaps and consolidate efforts" under compatible versions and interfaces.
+A: Manual KServe deployment requires:
 
-5. **Sustainability**: CNCF provides infrastructure, support, and community that ensure long-term viability of integration testing and compatibility matrices.
+1. Installing Cert-Manager (with correct CRD configuration)
+2. Installing Istio (with correct IngressClass setup)
+3. Installing KServe (with correct deployment mode)
+4. Configuring GPU support (device plugins, node labels)
+5. Setting up monitoring (Prometheus, Grafana, DCGM)
 
-6. **Standards development**: CNCF technical oversight helps KFabrik establish standard pipeline specifications and common metadata schemas that the ecosystem currently lacks.
+This process typically takes 2-4 weeks to get right. KFabrik handles all of this in under 10 minutes with tested, compatible configurations.
 
-KFabrik complements existing CNCF AI projects by solving the "developer experience and integration gap"—the missing cohesive layer that makes cloud-native AI practical for everyday developers.
+**Q: How does KFabrik compare to cloud-managed ML services?**
 
-**Q: How does KFabrik make money?**
+A: Cloud services (SageMaker, Vertex AI, Azure ML) are excellent for production but:
 
-A: KFabrik is a community-driven open-source project, not a commercial product. Contributors participate because CNAI complexity is a shared industry problem, and a neutral, open solution benefits everyone. Potential business models around KFabrik could include:
+- Create vendor lock-in with proprietary APIs
+- Expensive for persistent development environments
+- Slow iteration cycles requiring cloud deployment
+- Require internet connectivity
 
-- Hosted services for enterprise CI/CD
-- Support and consulting services
-- Training and certification programs
-- Managed cloud instances
+KFabrik provides local, open-source environments using the same KServe APIs that work across any Kubernetes cluster.
 
-However, the core project remains free and open-source.
+**Q: Why minikube addons instead of a standalone installer?**
 
-**Q: What's the roadmap?**
+A: Minikube addons provide:
 
-A: The initial release focuses on KServe-centric workflows with Ray and vLLM integration. Future plans include:
-
-- **Q1**: Enhanced vector database support, RAG pattern templates
-- **Q2**: Kubeflow integration for training workflows, multi-cluster support
-- **Q3**: Advanced observability, cost estimation tools, security scanning
-- **Q4**: Windows native support, ARM architecture support, performance optimizations
-
-Community feedback will heavily influence prioritization.
-
-**Q: How can we contribute or get involved?**
-
-A: KFabrik welcomes contributions:
-
-- **Code**: Submit PRs for features, bug fixes, or documentation
-- **Testing**: Try KFabrik with your workloads and report issues
-- **Documentation**: Improve guides, add examples, translate content
-- **Community**: Answer questions, help other users, present at meetups
-
-Visit [github.com/kfabrik/community](https://github.com/kfabrik/community) for contribution guidelines, development setup, and communication channels (Slack, mailing list, monthly meetings).
-
-**Q: What's different about KFabrik's approach to "opinionated defaults"?**
-
-A: Many tools claim to provide opinionated defaults but actually shift complexity rather than eliminating it. KFabrik's philosophy:
-
-1. **Boring reliability over cutting edge**: Default to stable, well-tested versions
-2. **Production patterns in dev**: Defaults mirror production topologies (e.g., Istio + Knative for KServe, even locally)
-3. **Secure by default**: Enable authentication, TLS, and RBAC out-of-the-box
-4. **Escape hatches everywhere**: Every default can be overridden; no magic
-
-This balances "just works" for beginners with "full control" for advanced users.
-
-### Competitive Questions
-
-**Q: How does KFabrik compare to Kubeflow?**
-
-A: Kubeflow and KFabrik serve different needs but can be complementary:
-
-**Kubeflow** is a comprehensive ML platform covering the entire ML lifecycle (data prep, training, hyperparameter tuning, serving, pipelines). It's broad, powerful, and addresses production ML workflows end-to-end. However, Kubeflow's comprehensiveness comes with complexity—it's notoriously difficult to install and configure, often taking weeks to get operational. As one CNCF TOC member noted, Kubeflow is needed to "fill the gap" and create a cohesive MLOps ecosystem, but integration challenges remain.
-
-**KFabrik** focuses narrowly on solving the developer and CI environment problem. It provides pre-integrated, tested stacks for cloud-native AI inference/serving workloads (KServe, Ray, vLLM, vector databases) that work out-of-the-box. KFabrik is lightweight, installs in minutes, and optimized for rapid iteration in dev/test workflows. It doesn't attempt to cover the full ML lifecycle—just the integration and cohesion problem for CNAI components.
-
-**When to use each**:
-- Use **Kubeflow** when you need full ML lifecycle management in production (training pipelines, experiment tracking, model registry)
-- Use **KFabrik** when you need fast, reproducible dev/test environments with integrated CNAI components
-- Use **both**: KFabrik for local development and CI testing, Kubeflow for production ML pipelines and lifecycle management
-
-KFabrik can actually make Kubeflow adoption easier by providing a quick dev environment where developers can experiment with Kubeflow Pipelines or KServe integration before committing to a full production Kubeflow deployment.
-
-**Q: Why not just use Docker Compose?**
-
-A: Docker Compose works well for simple multi-container applications but breaks down for cloud-native AI:
-
-1. **No Kubernetes**: KServe, Ray, and most CNAI tools require Kubernetes primitives (CRDs, operators, RBAC)
-2. **No resource management**: GPU allocation, autoscaling, and distributed workloads need Kubernetes schedulers
-3. **Deployment gap**: Compose configs don't translate to production Kubernetes deployments
-
-KFabrik uses real Kubernetes, ensuring dev environments match production architecture.
-
-**Q: What about cloud provider AI services (AWS SageMaker, Google Vertex AI, Azure ML)?**
-
-A: Managed AI services are excellent for production workloads but create challenges for development:
-
-- **Vendor lock-in**: APIs differ across providers; migrating is costly
-- **Cost**: Running persistent dev environments in the cloud is expensive
-- **Latency**: Slow iteration cycles when testing requires cloud deployment
-- **Connectivity**: Requires internet access; difficult in air-gapped scenarios
-
-KFabrik provides local, CNCF-native environments that work identically across clouds or on-prem. Teams can develop locally with KFabrik and deploy to any Kubernetes, including managed services that support CNCF standards.
-
-**Q: Couldn't we build this ourselves?**
-
-A: Yes—and many teams do. The problem is that every team solves the same integration challenges independently, wasting engineering effort. KFabrik consolidates this duplicated work into a shared, tested, community-maintained solution. Building internally means:
-
-- Ongoing maintenance burden as CNCF projects evolve
-- Knowledge concentrated in a few engineers (bus factor risk)
-- No community to share improvements or fixes
-
-Using KFabrik lets teams focus on AI features, not infrastructure plumbing.
+1. **Dependency management**: Addons can declare dependencies on other addons
+2. **Lifecycle integration**: Enable/disable with standard minikube commands
+3. **GPU support**: Minikube handles GPU passthrough configuration
+4. **Community distribution**: Addons are distributed with minikube releases
 
 ---
 
-**Document Version:** 1.0
-**Last Updated:** 2025-12-17
-**Status:** Draft for Community Review
+**Document Version:** 2.0
+**Last Updated:** February 2026
+**Status:** Current
