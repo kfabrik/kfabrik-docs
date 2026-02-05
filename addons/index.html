@@ -1,0 +1,1720 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Integrated platform for deploying and managing LLMs on Kubernetes">
+      
+      
+      
+        <link rel="canonical" href="https://kfabrik.io/addons/">
+      
+      
+        <link rel="prev" href="../architecture/">
+      
+      
+        <link rel="next" href="../prfaq/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Addons - KFabrik Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#addons" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="KFabrik Documentation" class="md-header__button md-logo" aria-label="KFabrik Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KFabrik Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Addons
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    minikube
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cli-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CLI Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Addons
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../prfaq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PRFAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cncf-landscape/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CNCF Landscape
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="KFabrik Documentation" class="md-nav__button md-logo" aria-label="KFabrik Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KFabrik Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    minikube
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Addons
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Addons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kfabrik-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-bootstrap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="kfabrik-bootstrap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespaces-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespaces Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kfabrik-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="kfabrik-model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-configured-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-Configured Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespace-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespace Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-with-kfabrik-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using with kfabrik CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kfabrik-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-monitoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="kfabrik-monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#components_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespace-created_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespace Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resource Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-for-gpu-workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended for GPU Workloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-minikube-with-appropriate-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting minikube with Appropriate Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disabling-addons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling Addons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addon-enable-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Addon Enable Fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models-not-deploying" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Models Not Deploying
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-not-detected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU Not Detected
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#out-of-memory-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Out of Memory Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See Also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prfaq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PRFAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cncf-landscape/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNCF Landscape
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="addons">Addons<a class="headerlink" href="#addons" title="Permanent link">&para;</a></h1>
+<p>The KFabrik addon suite provides a complete machine learning inference platform for minikube, enabling local development and testing of Large Language Models (LLMs) with GPU support.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The suite consists of three addons that work together:</p>
+<div class="highlight"><pre><span></span><code>kfabrik-bootstrap (required first)
+       │
+       ├──► kfabrik-model (optional, for LLM deployment)
+       │
+       └──► kfabrik-monitoring (optional, for observability)
+</code></pre></div>
+<p>The kfabrik-bootstrap addon must be enabled first as it provides the core infrastructure (KServe, Istio) that other addons depend on.</p>
+<h2 id="kfabrik-bootstrap">kfabrik-bootstrap<a class="headerlink" href="#kfabrik-bootstrap" title="Permanent link">&para;</a></h2>
+<h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
+<p>The foundation addon that installs all core infrastructure components required for ML inference workloads.</p>
+<h3 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cert Manager</td>
+<td>v1.16.1</td>
+<td>TLS certificate lifecycle management</td>
+</tr>
+<tr>
+<td>Istio</td>
+<td>v1.22.0</td>
+<td>Service mesh for traffic and security</td>
+</tr>
+<tr>
+<td>KServe</td>
+<td>v0.15.0</td>
+<td>Kubernetes-native ML model serving</td>
+</tr>
+<tr>
+<td>NVIDIA Device Plugin</td>
+<td>v0.14.1</td>
+<td>GPU resource discovery and allocation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Enable the addon</span>
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-bootstrap
+
+<span class="c1"># Monitor installation progress</span>
+kubectl<span class="w"> </span>get<span class="w"> </span><span class="nb">jobs</span><span class="w"> </span>-n<span class="w"> </span>kserve<span class="w"> </span>-w
+
+<span class="c1"># Verify components are running</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>cert-manager
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>istio-system
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kserve
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nvidia
+</code></pre></div>
+<h3 id="namespaces-created">Namespaces Created<a class="headerlink" href="#namespaces-created" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cert-manager</td>
+<td>Certificate management components and webhooks</td>
+</tr>
+<tr>
+<td>istio-system</td>
+<td>Istio control plane (istiod)</td>
+</tr>
+<tr>
+<td>kserve</td>
+<td>KServe controller and installer job</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p>Configuration is stored in a ConfigMap in the kserve namespace:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kfabrik-bootstrap-config</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kserve</span>
+<span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">CERT_MANAGER_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v1.16.1&quot;</span>
+<span class="w">  </span><span class="nt">ISTIO_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.22.0&quot;</span>
+<span class="w">  </span><span class="nt">KSERVE_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v0.15.0&quot;</span>
+<span class="w">  </span><span class="nt">INSTALL_CERT_MANAGER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">  </span><span class="nt">INSTALL_ISTIO</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">  </span><span class="nt">INSTALL_KSERVE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</code></pre></div>
+<h3 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h3>
+<p><strong>Helm-Based Installation:</strong> Uses a Job-based installer that runs Helm charts rather than static YAML manifests. This provides version pinning, configuration management, and upgrade capabilities.</p>
+<p><strong>RawDeployment Mode:</strong> KServe is configured for RawDeployment mode (standard Kubernetes Deployments) rather than Serverless mode (Knative). This reduces complexity, lowers resource overhead, and provides faster cold-start times for GPU workloads.</p>
+<p><strong>Job-Based Installer:</strong> A Kubernetes Job orchestrates sequential installation of components with proper dependency ordering. The job self-cleans after 5 minutes (TTL).</p>
+<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<p><strong>Check installer job:</strong>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span><span class="nb">jobs</span><span class="w"> </span>-n<span class="w"> </span>kserve
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kserve<span class="w"> </span>-l<span class="w"> </span>job-name<span class="o">=</span>kfabrik-installer
+</code></pre></div></p>
+<p><strong>Verify GPU detection:</strong>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.items[].status.capacity&#39;</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">name</span><span class="o">=</span>nvidia-device-plugin-ds
+</code></pre></div></p>
+<hr />
+<h2 id="kfabrik-model">kfabrik-model<a class="headerlink" href="#kfabrik-model" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_1">Purpose<a class="headerlink" href="#purpose_1" title="Permanent link">&para;</a></h3>
+<p>Provides model deployment configurations and the model-serving namespace for running LLM inference workloads.</p>
+<h3 id="pre-configured-models">Pre-Configured Models<a class="headerlink" href="#pre-configured-models" title="Permanent link">&para;</a></h3>
+<p>All models are optimized for consumer GPUs with 6GB VRAM or less:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Parameters</th>
+<th>VRAM</th>
+<th>RAM</th>
+<th>Download</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qwen-small</td>
+<td>0.5B</td>
+<td>~1GB</td>
+<td>~6GB</td>
+<td>~1GB</td>
+</tr>
+<tr>
+<td>qwen-medium</td>
+<td>1.5B</td>
+<td>~3GB</td>
+<td>~8GB</td>
+<td>~3GB</td>
+</tr>
+<tr>
+<td>tinyllama</td>
+<td>1.1B</td>
+<td>~2.5GB</td>
+<td>~6GB</td>
+<td>~2.2GB</td>
+</tr>
+<tr>
+<td>smollm2</td>
+<td>1.7B</td>
+<td>~3.5GB</td>
+<td>~8GB</td>
+<td>~3.4GB</td>
+</tr>
+<tr>
+<td>phi2</td>
+<td>2.7B</td>
+<td>~5.5GB</td>
+<td>~12GB</td>
+<td>~5.5GB</td>
+</tr>
+</tbody>
+</table>
+<p>RAM requirements are approximately 2-3x model size due to inference server overhead. Models are deployed one at a time.</p>
+<h3 id="installation_1">Installation<a class="headerlink" href="#installation_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Requires kfabrik-bootstrap to be enabled first</span>
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-bootstrap
+
+<span class="c1"># Wait for bootstrap to complete</span>
+kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Ready<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>istiod<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-n<span class="w"> </span>istio-system<span class="w"> </span>--timeout<span class="o">=</span>300s
+
+<span class="c1"># Enable kfabrik-model</span>
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-model
+</code></pre></div>
+<h3 id="namespace-created">Namespace Created<a class="headerlink" href="#namespace-created" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model-serving</td>
+<td>Deployed InferenceServices and model configuration ConfigMap</td>
+</tr>
+</tbody>
+</table>
+<h3 id="model-configuration">Model Configuration<a class="headerlink" href="#model-configuration" title="Permanent link">&para;</a></h3>
+<p>Model definitions are stored in a ConfigMap:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>configmap<span class="w"> </span>model-config<span class="w"> </span>-n<span class="w"> </span>model-serving<span class="w"> </span>-o<span class="w"> </span>yaml
+</code></pre></div>
+<p>Example model configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">models</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">qwen-small</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen-small</span>
+<span class="w">    </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Qwen</span><span class="nv"> </span><span class="s">2.5</span><span class="nv"> </span><span class="s">0.5B</span><span class="nv"> </span><span class="s">Instruct&quot;</span>
+<span class="w">    </span><span class="nt">modelFormat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">huggingface</span>
+<span class="w">    </span><span class="nt">storageUri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hf://Qwen/Qwen2.5-0.5B-Instruct&quot;</span>
+<span class="w">    </span><span class="nt">vram</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1GB&quot;</span>
+<span class="w">    </span><span class="nt">ram</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6GB&quot;</span>
+<span class="w">    </span><span class="nt">downloadSize</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1GB&quot;</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.5B&quot;</span>
+<span class="w">    </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="w">    </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4Gi&quot;</span>
+<span class="w">      </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span>
+<span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8Gi&quot;</span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">HF_MODEL_ID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Qwen/Qwen2.5-0.5B-Instruct&quot;</span>
+<span class="w">      </span><span class="nt">MAX_MODEL_LEN</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;512&quot;</span>
+<span class="w">      </span><span class="nt">GPU_MEMORY_UTILIZATION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.8&quot;</span>
+</code></pre></div>
+<h3 id="using-with-kfabrik-cli">Using with kfabrik CLI<a class="headerlink" href="#using-with-kfabrik-cli" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># List available models</span>
+kfabrik<span class="w"> </span>list
+
+<span class="c1"># Deploy a model</span>
+kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small<span class="w"> </span>--wait
+
+<span class="c1"># Query the model</span>
+kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="w"> </span>qwen-small<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;What is AI?&quot;</span>
+
+<span class="c1"># Delete the model</span>
+kfabrik<span class="w"> </span>delete<span class="w"> </span>--model<span class="w"> </span>qwen-small
+</code></pre></div>
+<h3 id="custom-models">Custom Models<a class="headerlink" href="#custom-models" title="Permanent link">&para;</a></h3>
+<p>To add custom models, create a custom configuration file:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># my-models.yaml</span>
+<span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">model-serving</span>
+<span class="nt">models</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my-model</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-model</span>
+<span class="w">    </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Custom</span><span class="nv"> </span><span class="s">Model&quot;</span>
+<span class="w">    </span><span class="nt">modelFormat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">huggingface</span>
+<span class="w">    </span><span class="nt">storageUri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hf://organization/model-name&quot;</span>
+<span class="w">    </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2&quot;</span>
+<span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8Gi&quot;</span>
+<span class="w">      </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span>
+<span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;16Gi&quot;</span>
+</code></pre></div>
+<p>Then deploy with:
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>deploy<span class="w"> </span>--config<span class="w"> </span>my-models.yaml<span class="w"> </span>--models<span class="w"> </span>my-model
+</code></pre></div></p>
+<hr />
+<h2 id="kfabrik-monitoring">kfabrik-monitoring<a class="headerlink" href="#kfabrik-monitoring" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_2">Purpose<a class="headerlink" href="#purpose_2" title="Permanent link">&para;</a></h3>
+<p>Provides a complete observability stack for monitoring ML inference workloads, including GPU metrics.</p>
+<h3 id="components_1">Components<a class="headerlink" href="#components_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prometheus</td>
+<td>v2.51.0</td>
+<td>Metrics collection and storage</td>
+</tr>
+<tr>
+<td>Grafana</td>
+<td>10.4.0</td>
+<td>Visualization and dashboards</td>
+</tr>
+<tr>
+<td>DCGM Exporter</td>
+<td>4.5.1</td>
+<td>NVIDIA GPU metrics exporter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="installation_2">Installation<a class="headerlink" href="#installation_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Enable after kfabrik-bootstrap</span>
+minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-monitoring
+
+<span class="c1"># Verify components</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
+</code></pre></div>
+<h3 id="namespace-created_1">Namespace Created<a class="headerlink" href="#namespace-created_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>monitoring</td>
+<td>Prometheus, Grafana, and DCGM Exporter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kfabrik-monitoring-config</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">PROMETHEUS_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v2.51.0&quot;</span>
+<span class="w">  </span><span class="nt">GRAFANA_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10.4.0&quot;</span>
+<span class="w">  </span><span class="nt">DCGM_EXPORTER_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4.5.1-4.8.0&quot;</span>
+<span class="w">  </span><span class="nt">PROMETHEUS_RETENTION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;15d&quot;</span>
+<span class="w">  </span><span class="nt">PROMETHEUS_STORAGE_SIZE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10Gi&quot;</span>
+<span class="w">  </span><span class="nt">GRAFANA_ADMIN_USER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span>
+<span class="w">  </span><span class="nt">GRAFANA_ADMIN_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span>
+</code></pre></div>
+<h3 id="accessing-dashboards">Accessing Dashboards<a class="headerlink" href="#accessing-dashboards" title="Permanent link">&para;</a></h3>
+<p><strong>Grafana:</strong>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/grafana<span class="w"> </span><span class="m">3000</span>:3000
+<span class="c1"># Open http://localhost:3000</span>
+<span class="c1"># Login: admin / admin</span>
+</code></pre></div></p>
+<p><strong>Prometheus:</strong>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/prometheus<span class="w"> </span><span class="m">9090</span>:9090
+<span class="c1"># Open http://localhost:9090</span>
+</code></pre></div></p>
+<h3 id="gpu-metrics">GPU Metrics<a class="headerlink" href="#gpu-metrics" title="Permanent link">&para;</a></h3>
+<p>The DCGM Exporter provides detailed GPU metrics:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DCGM_FI_DEV_GPU_UTIL</td>
+<td>GPU utilization percentage</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_MEM_COPY_UTIL</td>
+<td>Memory copy utilization</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_FB_USED</td>
+<td>Framebuffer memory used (bytes)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_FB_FREE</td>
+<td>Framebuffer memory free (bytes)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_GPU_TEMP</td>
+<td>GPU temperature (Celsius)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_POWER_USAGE</td>
+<td>Power consumption (Watts)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resource-requirements">Resource Requirements<a class="headerlink" href="#resource-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="minimum-requirements">Minimum Requirements<a class="headerlink" href="#minimum-requirements" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Minimum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>4 cores</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>8GB RAM</td>
+</tr>
+<tr>
+<td>Disk</td>
+<td>40GB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recommended-for-gpu-workloads">Recommended for GPU Workloads<a class="headerlink" href="#recommended-for-gpu-workloads" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>8+ cores</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>16-32GB RAM</td>
+</tr>
+<tr>
+<td>Disk</td>
+<td>50GB+</td>
+</tr>
+<tr>
+<td>GPU VRAM</td>
+<td>6GB+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="starting-minikube-with-appropriate-resources">Starting minikube with Appropriate Resources<a class="headerlink" href="#starting-minikube-with-appropriate-resources" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Set persistent defaults</span>
+minikube<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>cpus<span class="w"> </span><span class="m">8</span>
+minikube<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>memory<span class="w"> </span><span class="m">32768</span>
+minikube<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>disk-size<span class="w"> </span>50g
+
+<span class="c1"># Start with GPU support</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--driver<span class="o">=</span>docker<span class="w"> </span>--gpus<span class="o">=</span>all
+</code></pre></div>
+<hr />
+<h2 id="disabling-addons">Disabling Addons<a class="headerlink" href="#disabling-addons" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Disable in reverse order of dependencies</span>
+minikube<span class="w"> </span>addons<span class="w"> </span>disable<span class="w"> </span>kfabrik-monitoring
+minikube<span class="w"> </span>addons<span class="w"> </span>disable<span class="w"> </span>kfabrik-model
+minikube<span class="w"> </span>addons<span class="w"> </span>disable<span class="w"> </span>kfabrik-bootstrap
+</code></pre></div>
+<p>For complete cleanup including CRDs:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Delete Helm releases</span>
+helm<span class="w"> </span>uninstall<span class="w"> </span>kserve<span class="w"> </span>-n<span class="w"> </span>kserve
+helm<span class="w"> </span>uninstall<span class="w"> </span>istiod<span class="w"> </span>-n<span class="w"> </span>istio-system
+helm<span class="w"> </span>uninstall<span class="w"> </span>istio-base<span class="w"> </span>-n<span class="w"> </span>istio-system
+helm<span class="w"> </span>uninstall<span class="w"> </span>cert-manager<span class="w"> </span>-n<span class="w"> </span>cert-manager
+
+<span class="c1"># Delete namespaces</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>namespace<span class="w"> </span>model-serving<span class="w"> </span>monitoring<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>kserve<span class="w"> </span>istio-system<span class="w"> </span>cert-manager
+
+<span class="c1"># Delete CRDs</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>crd<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;kserve|istio|cert-manager&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>crd
+</code></pre></div>
+<hr />
+<h2 id="troubleshooting_1">Troubleshooting<a class="headerlink" href="#troubleshooting_1" title="Permanent link">&para;</a></h2>
+<h3 id="addon-enable-fails">Addon Enable Fails<a class="headerlink" href="#addon-enable-fails" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check addon status</span>
+minikube<span class="w"> </span>addons<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>kfabrik
+
+<span class="c1"># View installer logs</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kserve<span class="w"> </span>-l<span class="w"> </span>job-name<span class="o">=</span>kfabrik-installer
+
+<span class="c1"># Check events</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>kserve<span class="w"> </span>--sort-by<span class="o">=</span><span class="s1">&#39;.lastTimestamp&#39;</span>
+</code></pre></div>
+<h3 id="models-not-deploying">Models Not Deploying<a class="headerlink" href="#models-not-deploying" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check InferenceService status</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>inferenceservice<span class="w"> </span>-n<span class="w"> </span>model-serving
+
+<span class="c1"># Describe for detailed conditions</span>
+kubectl<span class="w"> </span>describe<span class="w"> </span>inferenceservice<span class="w"> </span>&lt;name&gt;<span class="w"> </span>-n<span class="w"> </span>model-serving
+
+<span class="c1"># Check pod status</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>model-serving
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>model-serving<span class="w"> </span>&lt;pod-name&gt;
+</code></pre></div>
+<h3 id="gpu-not-detected">GPU Not Detected<a class="headerlink" href="#gpu-not-detected" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verify device plugin is running</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nvidia
+
+<span class="c1"># Check plugin logs</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">name</span><span class="o">=</span>nvidia-device-plugin-ds
+
+<span class="c1"># Verify GPU is advertised</span>
+kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>minikube<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nvidia.com/gpu
+</code></pre></div>
+<h3 id="out-of-memory-errors">Out of Memory Errors<a class="headerlink" href="#out-of-memory-errors" title="Permanent link">&para;</a></h3>
+<p>Increase minikube memory allocation:
+<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>stop
+minikube<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>memory<span class="w"> </span><span class="m">32768</span>
+minikube<span class="w"> </span>start<span class="w"> </span>--gpus<span class="o">=</span>all
+</code></pre></div></p>
+<hr />
+<h2 id="version-compatibility">Version Compatibility<a class="headerlink" href="#version-compatibility" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>minikube</th>
+<th>Kubernetes</th>
+<th>Cert Manager</th>
+<th>Istio</th>
+<th>KServe</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.37.x</td>
+<td>1.28-1.32</td>
+<td>v1.16.1</td>
+<td>1.22.0</td>
+<td>v0.15.0</td>
+<td>Tested</td>
+</tr>
+<tr>
+<td>1.36.x</td>
+<td>1.28-1.31</td>
+<td>v1.16.1</td>
+<td>1.22.0</td>
+<td>v0.15.0</td>
+<td>Untested</td>
+</tr>
+<tr>
+<td>&lt; 1.36</td>
+<td>&lt; 1.28</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>Not supported</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../cli-reference/">CLI Reference</a> - kfabrik command documentation</li>
+<li><a href="../architecture/">Architecture</a> - Detailed design documentation</li>
+<li><a href="../getting-started/">Getting Started</a> - Installation guide</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

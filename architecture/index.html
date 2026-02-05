@@ -1,0 +1,1595 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Integrated platform for deploying and managing LLMs on Kubernetes">
+      
+      
+      
+        <link rel="canonical" href="https://kfabrik.io/architecture/">
+      
+      
+        <link rel="prev" href="../cli-reference/">
+      
+      
+        <link rel="next" href="../addons/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Architecture - KFabrik Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="KFabrik Documentation" class="md-header__button md-logo" aria-label="KFabrik Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KFabrik Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    minikube
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cli-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CLI Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../addons/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Addons
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../prfaq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PRFAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cncf-landscape/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CNCF Landscape
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="KFabrik Documentation" class="md-nav__button md-logo" aria-label="KFabrik Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KFabrik Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    minikube
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Responsibilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component Responsibilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-bootstrap-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-bootstrap Addon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-model-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-model Addon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-monitoring-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-monitoring Addon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bootstrap-installation-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap Installation Sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-rawdeployment-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why RawDeployment Mode?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-sequential-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Sequential Installation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-cleanup-before-kserve-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Cleanup Before KServe Installation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-deployment-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Deployment Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inferenceservice-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InferenceService Specification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-scrape-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus Scrape Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-metrics-dcgm-exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU Metrics (DCGM Exporter)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#privilege-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privilege Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Exposure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependencies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resource Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-resource-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Resource Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port Assignments
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../addons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Addons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prfaq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PRFAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cncf-landscape/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNCF Landscape
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>This document describes the architecture, component interactions, and operational characteristics of the KFabrik platform.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>KFabrik consists of four primary components that work together to provide a complete ML inference platform:</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────────────┐
+│                         User Workstation                                │
+│                                                                          │
+│   ┌─────────────┐                                                       │
+│   │   kfabrik   │  CLI for model deployment, querying, and management  │
+│   │    CLI      │                                                       │
+│   └──────┬──────┘                                                       │
+│          │                                                               │
+│          │ kubectl / kubernetes API                                      │
+│          ▼                                                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                     Minikube Cluster (Docker Driver)                    │
+│                                                                          │
+│   ┌─────────────────────────────────────────────────────────────────┐   │
+│   │                    kfabrik-bootstrap addon                      │   │
+│   │                                                                  │   │
+│   │   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │   │
+│   │   │ Cert-Manager │  │    Istio     │  │   KServe     │         │   │
+│   │   │   v1.16.1    │  │   v1.22.0    │  │   v0.15.0    │         │   │
+│   │   └──────────────┘  └──────────────┘  └──────────────┘         │   │
+│   │                                                                  │   │
+│   │   ┌──────────────────────────────────────────────────┐         │   │
+│   │   │           NVIDIA Device Plugin v0.14.1           │         │   │
+│   │   └──────────────────────────────────────────────────┘         │   │
+│   └─────────────────────────────────────────────────────────────────┘   │
+│                                                                          │
+│   ┌─────────────────────────────────────────────────────────────────┐   │
+│   │                    kfabrik-model addon                          │   │
+│   │                                                                  │   │
+│   │   ┌──────────────────────────────────────────────────┐         │   │
+│   │   │              model-serving namespace             │         │   │
+│   │   │                                                  │         │   │
+│   │   │   ConfigMap: model-config (5 pre-configured)    │         │   │
+│   │   │   InferenceServices: user-deployed models       │         │   │
+│   │   │   Predictor Pods: model inference containers    │         │   │
+│   │   └──────────────────────────────────────────────────┘         │   │
+│   └─────────────────────────────────────────────────────────────────┘   │
+│                                                                          │
+│   ┌─────────────────────────────────────────────────────────────────┐   │
+│   │                  kfabrik-monitoring addon                       │   │
+│   │                                                                  │
+│   │   ┌────────────┐  ┌────────────┐  ┌─────────────────┐          │   │
+│   │   │ Prometheus │  │  Grafana   │  │  DCGM Exporter  │          │   │
+│   │   │  v2.51.0   │  │  v10.4.0   │  │    v4.5.1       │          │   │
+│   │   └────────────┘  └────────────┘  └─────────────────┘          │   │
+│   └─────────────────────────────────────────────────────────────────┘   │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h2 id="component-responsibilities">Component Responsibilities<a class="headerlink" href="#component-responsibilities" title="Permanent link">&para;</a></h2>
+<h3 id="kfabrik-cli">kfabrik CLI<a class="headerlink" href="#kfabrik-cli" title="Permanent link">&para;</a></h3>
+<p>Provides a command-line interface for deploying models, querying inference endpoints, and managing the model lifecycle. The CLI communicates with the Kubernetes API to create InferenceService resources and uses kubectl port-forwarding to access inference endpoints.</p>
+<p><strong>Kubernetes Client Architecture:</strong></p>
+<ul>
+<li><strong>Typed Clientset</strong> (<code>kubernetes.Clientset</code>) for standard Kubernetes resources (ConfigMaps, Pods, Services)</li>
+<li><strong>Dynamic Client</strong> (<code>dynamic.Interface</code>) for custom resources (InferenceServices)</li>
+</ul>
+<h3 id="kfabrik-bootstrap-addon">kfabrik-bootstrap Addon<a class="headerlink" href="#kfabrik-bootstrap-addon" title="Permanent link">&para;</a></h3>
+<p>Installs the foundational infrastructure required for model serving:</p>
+<ul>
+<li><strong>Cert-Manager</strong> for TLS certificate management</li>
+<li><strong>Istio</strong> for service mesh routing</li>
+<li><strong>KServe</strong> for model lifecycle management</li>
+<li><strong>NVIDIA Device Plugin</strong> for GPU resource scheduling</li>
+</ul>
+<p>The addon uses a Kubernetes Job to orchestrate Helm-based installations in dependency order.</p>
+<h3 id="kfabrik-model-addon">kfabrik-model Addon<a class="headerlink" href="#kfabrik-model-addon" title="Permanent link">&para;</a></h3>
+<p>Creates the model-serving namespace and deploys a ConfigMap containing pre-configured model definitions. These definitions specify HuggingFace model URIs, resource requirements, and inference server parameters optimized for 6GB VRAM GPUs.</p>
+<h3 id="kfabrik-monitoring-addon">kfabrik-monitoring Addon<a class="headerlink" href="#kfabrik-monitoring-addon" title="Permanent link">&para;</a></h3>
+<p>Deploys the observability stack:</p>
+<ul>
+<li><strong>Prometheus</strong> for metrics collection</li>
+<li><strong>Grafana</strong> for visualization</li>
+<li><strong>DCGM Exporter</strong> for GPU-specific metrics</li>
+</ul>
+<p>Prometheus is pre-configured to scrape KServe inference metrics and DCGM GPU metrics.</p>
+<h2 id="bootstrap-installation-sequence">Bootstrap Installation Sequence<a class="headerlink" href="#bootstrap-installation-sequence" title="Permanent link">&para;</a></h2>
+<p>The bootstrap addon installs components through a sequenced process with explicit health checks:</p>
+<div class="highlight"><pre><span></span><code>Phase 1: Cert-Manager Installation (timeout: 600s)
+├── Add Jetstack Helm repository
+├── Helm install cert-manager with CRDs enabled
+├── Wait for cert-manager deployment (3 replicas)
+├── Wait for cert-manager-webhook deployment
+├── Wait for cert-manager-cainjector deployment
+└── Verify certificates.cert-manager.io CRD exists
+
+Phase 2: Istio Installation (timeout: 600s)
+├── Add Istio Helm repository
+├── Helm install istio-base (CRDs and cluster resources)
+├── Helm install istiod (control plane)
+├── Wait for istiod deployment
+├── Verify gateways.networking.istio.io CRD exists
+└── Create istio IngressClass resource
+
+Phase 3: KServe Cleanup (idempotency preparation)
+├── Delete existing ClusterRoles
+├── Delete existing ClusterRoleBindings
+├── Delete existing ValidatingWebhookConfigurations
+├── Delete existing MutatingWebhookConfigurations
+├── Delete existing CRDs
+└── Wait 5 seconds for cleanup completion
+
+Phase 4: KServe Installation (timeout: 600s)
+├── Helm install kserve-crd from OCI registry
+├── Helm install kserve controller with RawDeployment mode
+├── Wait for kserve-controller-manager deployment
+└── Verify inferenceservices.serving.kserve.io CRD exists
+
+Phase 5: GPU Node Labeling
+├── Query nodes for nvidia.com/gpu capacity
+├── Label GPU nodes with nvidia.com/gpu.present=true
+└── Log warning if no GPU nodes found
+</code></pre></div>
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="why-rawdeployment-mode">Why RawDeployment Mode?<a class="headerlink" href="#why-rawdeployment-mode" title="Permanent link">&para;</a></h3>
+<p>KServe supports two deployment modes: Serverless (using Knative) and RawDeployment (using standard Kubernetes Deployments). KFabrik uses RawDeployment for several reasons:</p>
+<ol>
+<li>Knative adds significant complexity and resource overhead</li>
+<li>Scale-to-zero provides minimal benefit for GPU workloads (GPU allocation is not elastic)</li>
+<li>Cold-start latency from scale-to-zero degrades user experience</li>
+<li>RawDeployment mode is simpler to debug and operate</li>
+</ol>
+<h3 id="why-sequential-installation">Why Sequential Installation?<a class="headerlink" href="#why-sequential-installation" title="Permanent link">&para;</a></h3>
+<p>Parallel installation would be faster but creates race conditions. Istio requires Cert-Manager for TLS certificates. KServe requires Istio for ingress routing. The sequential approach adds approximately 2 minutes to installation time but eliminates entire categories of failure modes.</p>
+<h3 id="why-cleanup-before-kserve-installation">Why Cleanup Before KServe Installation?<a class="headerlink" href="#why-cleanup-before-kserve-installation" title="Permanent link">&para;</a></h3>
+<p>KServe's webhook configurations and CRDs can become orphaned when previous installations fail mid-process. The cleanup phase ensures idempotent behavior: running the installer multiple times produces the same result.</p>
+<h2 id="model-deployment-flow">Model Deployment Flow<a class="headerlink" href="#model-deployment-flow" title="Permanent link">&para;</a></h2>
+<p>When a user runs <code>kfabrik deploy --models qwen-small</code>:</p>
+<div class="highlight"><pre><span></span><code>1. CLI reads model-config ConfigMap from model-serving namespace
+2. CLI parses YAML and extracts qwen-small configuration
+3. CLI applies default resource values for any unspecified fields
+4. CLI checks if InferenceService qwen-small already exists
+   └── If exists: skip deployment (idempotent)
+   └── If not exists: continue
+5. CLI creates InferenceService resource via Kubernetes API
+6. KServe controller watches InferenceService creation
+7. Controller creates:
+   ├── Predictor Deployment (model inference container)
+   ├── Predictor Service (internal ClusterIP)
+   ├── Istio VirtualService (ingress routing)
+   └── Istio DestinationRule (traffic management)
+8. Predictor pod starts:
+   ├── Downloads model from HuggingFace (storageUri)
+   ├── Initializes inference server (vLLM/TGI)
+   └── Exposes prediction endpoint on port 80
+9. Pod readiness probe succeeds
+10. InferenceService status updated to Ready=True
+11. CLI detects Ready status (if --wait flag specified)
+</code></pre></div>
+<h2 id="inferenceservice-specification">InferenceService Specification<a class="headerlink" href="#inferenceservice-specification" title="Permanent link">&para;</a></h2>
+<p>The CLI generates InferenceService resources with the following structure:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">serving.kserve.io/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">InferenceService</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen-small</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">model-serving</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">predictor</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">modelFormat</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">huggingface</span>
+<span class="w">      </span><span class="nt">storageUri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hf://Qwen/Qwen2.5-0.5B-Instruct</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2Gi&quot;</span>
+<span class="w">          </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="w">        </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2&quot;</span>
+<span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4Gi&quot;</span>
+<span class="w">          </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HF_MODEL_ID</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Qwen/Qwen2.5-0.5B-Instruct&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MAX_MODEL_LEN</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2048&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DTYPE</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;float16&quot;</span>
+</code></pre></div>
+<h2 id="monitoring-architecture">Monitoring Architecture<a class="headerlink" href="#monitoring-architecture" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────────┐
+│                      monitoring namespace                           │
+│                                                                      │
+│  ┌─────────────────┐      scrape       ┌─────────────────────────┐ │
+│  │   Prometheus    │◄──────────────────│    DCGM Exporter        │ │
+│  │                 │      :9400        │    (DaemonSet)          │ │
+│  │  • Scrape jobs  │                   │    GPU nodes only       │ │
+│  │  • Alert rules  │                   └─────────────────────────┘ │
+│  │  • TSDB storage │                                               │
+│  └────────┬────────┘                                               │
+│           │                                                         │
+│           │ query :9090                                             │
+│           ▼                                                         │
+│  ┌─────────────────┐                                               │
+│  │    Grafana      │                                               │
+│  │                 │                                               │
+│  │  • Dashboards   │                                               │
+│  │  • Data sources │                                               │
+│  │  • Alerting     │                                               │
+│  └─────────────────┘                                               │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+            ▲
+            │ scrape
+            │
+┌───────────┴─────────────────────────────────────────────────────────┐
+│                    model-serving namespace                          │
+│                                                                      │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐    │
+│  │  qwen-small     │  │  qwen-medium    │  │    phi2         │    │
+│  │  predictor      │  │  predictor      │  │  predictor      │    │
+│  │    :9090        │  │    :9090        │  │    :9090        │    │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘    │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="prometheus-scrape-jobs">Prometheus Scrape Jobs<a class="headerlink" href="#prometheus-scrape-jobs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scrape Job</th>
+<th>Targets</th>
+<th>Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prometheus</td>
+<td>Self (localhost:9090)</td>
+<td>Prometheus internal metrics</td>
+</tr>
+<tr>
+<td>kubernetes-apiservers</td>
+<td>API server</td>
+<td>API request latency, etcd metrics</td>
+</tr>
+<tr>
+<td>kubernetes-nodes</td>
+<td>All nodes</td>
+<td>Node CPU, memory, disk</td>
+</tr>
+<tr>
+<td>kubernetes-nodes-cadvisor</td>
+<td>All nodes</td>
+<td>Container resource usage</td>
+</tr>
+<tr>
+<td>kubernetes-service-endpoints</td>
+<td>Annotated services</td>
+<td>Custom service metrics</td>
+</tr>
+<tr>
+<td>kubernetes-pods</td>
+<td>Annotated pods</td>
+<td>Custom pod metrics</td>
+</tr>
+<tr>
+<td>dcgm-exporter</td>
+<td>GPU node pods</td>
+<td>GPU utilization, temperature, memory</td>
+</tr>
+<tr>
+<td>kserve-inferenceservices</td>
+<td>Model predictor pods</td>
+<td>Inference latency, throughput</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gpu-metrics-dcgm-exporter">GPU Metrics (DCGM Exporter)<a class="headerlink" href="#gpu-metrics-dcgm-exporter" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DCGM_FI_DEV_GPU_UTIL</td>
+<td>gauge</td>
+<td>GPU utilization percentage</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_MEM_COPY_UTIL</td>
+<td>gauge</td>
+<td>Memory copy engine utilization</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_FB_FREE</td>
+<td>gauge</td>
+<td>Free framebuffer memory (MiB)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_FB_USED</td>
+<td>gauge</td>
+<td>Used framebuffer memory (MiB)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_FB_TOTAL</td>
+<td>gauge</td>
+<td>Total framebuffer memory (MiB)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_GPU_TEMP</td>
+<td>gauge</td>
+<td>GPU temperature (Celsius)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_MEMORY_TEMP</td>
+<td>gauge</td>
+<td>Memory temperature (Celsius)</td>
+</tr>
+<tr>
+<td>DCGM_FI_DEV_POWER_USAGE</td>
+<td>gauge</td>
+<td>Power consumption (Watts)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="privilege-requirements">Privilege Requirements<a class="headerlink" href="#privilege-requirements" title="Permanent link">&para;</a></h3>
+<p>The kfabrik-bootstrap installer Job requires cluster-admin privileges for:</p>
+<ul>
+<li>Creating CustomResourceDefinitions (cluster-scoped)</li>
+<li>Creating ClusterRoles and ClusterRoleBindings</li>
+<li>Creating ValidatingWebhookConfigurations</li>
+<li>Installing Helm charts that modify cluster-wide resources</li>
+</ul>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>Installer Job has TTL of 300 seconds (auto-deleted after completion)</li>
+<li>ServiceAccount is scoped to kserve namespace</li>
+<li>Installer runs once during addon enablement, not continuously</li>
+</ul>
+<h3 id="network-exposure">Network Exposure<a class="headerlink" href="#network-exposure" title="Permanent link">&para;</a></h3>
+<p>By default, KFabrik does not expose services outside the cluster. All access occurs through:</p>
+<ul>
+<li><code>kubectl port-forward</code> for CLI queries</li>
+<li><code>minikube service</code> for Grafana/Prometheus dashboards</li>
+</ul>
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<h3 id="external-dependencies">External Dependencies<a class="headerlink" href="#external-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Source</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cert-Manager</td>
+<td>v1.16.1</td>
+<td>Jetstack Helm</td>
+<td>TLS certificate management</td>
+</tr>
+<tr>
+<td>Istio</td>
+<td>v1.22.0</td>
+<td>Istio Helm</td>
+<td>Service mesh, ingress</td>
+</tr>
+<tr>
+<td>KServe</td>
+<td>v0.15.0</td>
+<td>KServe OCI</td>
+<td>Model serving platform</td>
+</tr>
+<tr>
+<td>NVIDIA Device Plugin</td>
+<td>v0.14.1</td>
+<td>NVIDIA</td>
+<td>GPU resource scheduling</td>
+</tr>
+<tr>
+<td>Prometheus</td>
+<td>v2.51.0</td>
+<td>Docker Hub</td>
+<td>Metrics collection</td>
+</tr>
+<tr>
+<td>Grafana</td>
+<td>v10.4.0</td>
+<td>Docker Hub</td>
+<td>Visualization</td>
+</tr>
+<tr>
+<td>DCGM Exporter</td>
+<td>v4.5.1</td>
+<td>NVIDIA</td>
+<td>GPU metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="runtime-dependencies">Runtime Dependencies<a class="headerlink" href="#runtime-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dependency</th>
+<th>Required By</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minikube</td>
+<td>kfabrik CLI</td>
+<td>Cluster management</td>
+</tr>
+<tr>
+<td>kubectl</td>
+<td>kfabrik CLI</td>
+<td>Port-forwarding, API access</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>minikube</td>
+<td>Container runtime</td>
+</tr>
+<tr>
+<td>NVIDIA Driver</td>
+<td>Host</td>
+<td>GPU access</td>
+</tr>
+<tr>
+<td>NVIDIA Container Toolkit</td>
+<td>minikube</td>
+<td>GPU passthrough</td>
+</tr>
+</tbody>
+</table>
+<h2 id="resource-requirements">Resource Requirements<a class="headerlink" href="#resource-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="default-resource-requirements">Default Resource Requirements<a class="headerlink" href="#default-resource-requirements" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>CPU Request</th>
+<th>CPU Limit</th>
+<th>Memory Request</th>
+<th>Memory Limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KServe Controller</td>
+<td>100m</td>
+<td>500m</td>
+<td>256Mi</td>
+<td>512Mi</td>
+</tr>
+<tr>
+<td>Prometheus</td>
+<td>250m</td>
+<td>500m</td>
+<td>512Mi</td>
+<td>1Gi</td>
+</tr>
+<tr>
+<td>Grafana</td>
+<td>100m</td>
+<td>200m</td>
+<td>256Mi</td>
+<td>512Mi</td>
+</tr>
+<tr>
+<td>DCGM Exporter</td>
+<td>100m</td>
+<td>500m</td>
+<td>512Mi</td>
+<td>1Gi</td>
+</tr>
+<tr>
+<td>Model Predictor (small)</td>
+<td>1</td>
+<td>2</td>
+<td>2Gi</td>
+<td>4Gi</td>
+</tr>
+<tr>
+<td>Model Predictor (medium)</td>
+<td>2</td>
+<td>4</td>
+<td>6Gi</td>
+<td>10Gi</td>
+</tr>
+</tbody>
+</table>
+<h3 id="port-assignments">Port Assignments<a class="headerlink" href="#port-assignments" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+<th>Protocol</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prometheus</td>
+<td>9090</td>
+<td>HTTP</td>
+<td>Metrics API, Web UI</td>
+</tr>
+<tr>
+<td>Grafana</td>
+<td>3000</td>
+<td>HTTP</td>
+<td>Dashboard UI</td>
+</tr>
+<tr>
+<td>DCGM Exporter</td>
+<td>9400</td>
+<td>HTTP</td>
+<td>GPU metrics endpoint</td>
+</tr>
+<tr>
+<td>Model Predictor</td>
+<td>80</td>
+<td>HTTP</td>
+<td>Inference API</td>
+</tr>
+<tr>
+<td>Model Predictor Metrics</td>
+<td>9090</td>
+<td>HTTP</td>
+<td>Prometheus metrics</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

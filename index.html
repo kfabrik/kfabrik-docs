@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Open-source tool to democratize cloud-native AI development">
+        <meta name="description" content="Integrated platform for deploying and managing LLMs on Kubernetes">
       
       
       
@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
@@ -176,13 +176,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/kserve" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    kserve
+    minikube
   </div>
 </a>
       </div>
@@ -247,13 +247,51 @@
   
   
     <li class="md-tabs__item">
-      <a href="cncf-landscape/" class="md-tabs__link">
+      <a href="cli-reference/" class="md-tabs__link">
         
   
   
     
   
-  CNCF Landscape
+  CLI Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="addons/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Addons
 
       </a>
     </li>
@@ -273,6 +311,25 @@
     
   
   PRFAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="cncf-landscape/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CNCF Landscape
 
       </a>
     </li>
@@ -332,13 +389,13 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/kserve" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/kubernetes/minikube" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    kserve
+    minikube
   </div>
 </a>
     </div>
@@ -434,17 +491,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#our-solution" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Our Solution
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#core-components" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -453,13 +499,74 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Core Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-bootstrap-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-bootstrap Addon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-model-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-model Addon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kfabrik-monitoring-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kfabrik-monitoring Addon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-status" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Project Status
+        Quick Start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Principles
       
     </span>
   </a>
@@ -471,17 +578,6 @@
     <span class="md-ellipsis">
       
         Quick Links
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#built-for-the-cncf-ecosystem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Built for the CNCF Ecosystem
       
     </span>
   </a>
@@ -530,14 +626,68 @@
   
   
     <li class="md-nav__item">
-      <a href="cncf-landscape/" class="md-nav__link">
+      <a href="cli-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    CNCF Landscape
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="addons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Addons
   
 
     
@@ -565,6 +715,33 @@
     
   
     PRFAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cncf-landscape/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNCF Landscape
   
 
     
@@ -625,37 +802,164 @@
 
 
 <h1 id="kfabrik-documentation">KFabrik Documentation<a class="headerlink" href="#kfabrik-documentation" title="Permanent link">&para;</a></h1>
-<p>Welcome to KFabrik, an open-source developer and CI tool that eliminates the complexity barrier in cloud-native AI development.</p>
+<p>Welcome to KFabrik, an integrated platform for deploying and managing Large Language Models (LLMs) on local Kubernetes clusters.</p>
 <h2 id="what-is-kfabrik">What is KFabrik?<a class="headerlink" href="#what-is-kfabrik" title="Permanent link">&para;</a></h2>
-<p>KFabrik enables developers to spin up complete, production-like CNCF AI stacks—including Kubernetes, KServe, Ray, vLLM, and vector databases—on their laptops or in CI pipelines in minutes instead of weeks.</p>
+<p>KFabrik enables ML developers to deploy production-grade LLM inference servers on minikube with a single command. A typical deployment takes under 10 minutes and requires no manual configuration of Kubernetes resources, service mesh routing, or monitoring infrastructure.</p>
 <h2 id="the-problem-we-solve">The Problem We Solve<a class="headerlink" href="#the-problem-we-solve" title="Permanent link">&para;</a></h2>
-<p>Today's cloud-native AI platforms are a fragmented patchwork of specialized tools. While production-grade technologies like KServe, Ray, and vLLM exist, integrating them into a cohesive stack creates massive complexity. Organizations spend weeks wiring together Kubernetes, service meshes, model servers, vector databases, and observability tools—only to find that versions conflict, configurations break, and "it works on my laptop" becomes "it fails in CI."</p>
-<h2 id="our-solution">Our Solution<a class="headerlink" href="#our-solution" title="Permanent link">&para;</a></h2>
-<p>KFabrik provides pre-integrated, tested cloud-native AI stacks with:</p>
+<p>ML developers face significant friction when testing LLM deployments locally:</p>
 <ul>
-<li><strong>Unified Integration</strong>: Compatible versions of KServe, Ray, vLLM, and vector databases that work together out-of-the-box</li>
-<li><strong>Fast Setup</strong>: Complete CNAI environments in 15-30 minutes instead of weeks</li>
-<li><strong>Reproducible Environments</strong>: Identical configurations across dev, CI, and production-like environments</li>
-<li><strong>Opinionated Defaults</strong>: Production-ready configurations based on CNCF best practices</li>
-<li><strong>Full Customization</strong>: Every aspect is configurable through declarative configuration files</li>
+<li><strong>Configuration Burden</strong>: Deploying a single model requires creating and maintaining dozens of Kubernetes manifests across multiple namespaces</li>
+<li><strong>Dependency Management</strong>: The ML serving stack has strict ordering requirements that frequently fail due to race conditions</li>
+<li><strong>Observability Gap</strong>: Understanding model performance requires correlating inference latency metrics with GPU utilization</li>
+<li><strong>Reproducibility</strong>: Development environments diverge from production when developers take shortcuts</li>
 </ul>
+<p>KFabrik solves these problems by providing an opinionated, fully-integrated ML inference platform that deploys with a single command.</p>
 <h2 id="core-components">Core Components<a class="headerlink" href="#core-components" title="Permanent link">&para;</a></h2>
-<p>KFabrik comprises three core components:</p>
+<p>KFabrik comprises a CLI and three minikube addons:</p>
+<h3 id="kfabrik-cli">kfabrik CLI<a class="headerlink" href="#kfabrik-cli" title="Permanent link">&para;</a></h3>
+<p>Command-line interface for model deployment, querying, and management. Provides commands for:</p>
 <ul>
-<li><strong>kfabric-bootstrap</strong>: Bootstraps complete, integrated CNAI stacks with a single command</li>
-<li><strong>kfabric-runtime</strong>: Orchestrates runtime wiring, health checks, and service discovery across components</li>
-<li><strong>kfabric-control</strong>: Provides declarative APIs for stack management and automation</li>
+<li>Starting/stopping clusters with GPU support</li>
+<li>Deploying and managing models</li>
+<li>Querying models via OpenAI-compatible API</li>
+<li>Viewing logs and status</li>
 </ul>
-<h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">&para;</a></h2>
-<p>KFabrik is currently in early development. The software components (kfabric-bootstrap, kfabric-runtime, kfabric-control) will be released in the coming weeks. This documentation site is being prepared to support the upcoming launch.</p>
+<h3 id="kfabrik-bootstrap-addon">kfabrik-bootstrap Addon<a class="headerlink" href="#kfabrik-bootstrap-addon" title="Permanent link">&para;</a></h3>
+<p>Installs foundational infrastructure:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cert-Manager</td>
+<td>v1.16.1</td>
+<td>TLS certificate management</td>
+</tr>
+<tr>
+<td>Istio</td>
+<td>v1.22.0</td>
+<td>Service mesh and ingress routing</td>
+</tr>
+<tr>
+<td>KServe</td>
+<td>v0.15.0</td>
+<td>Model serving platform</td>
+</tr>
+<tr>
+<td>NVIDIA Device Plugin</td>
+<td>v0.14.1</td>
+<td>GPU resource scheduling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kfabrik-model-addon">kfabrik-model Addon<a class="headerlink" href="#kfabrik-model-addon" title="Permanent link">&para;</a></h3>
+<p>Provides pre-configured model definitions optimized for consumer GPUs (6GB VRAM):</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Parameters</th>
+<th>VRAM</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qwen-small</td>
+<td>0.5B</td>
+<td>~1GB</td>
+<td>Qwen 2.5 0.5B Instruct</td>
+</tr>
+<tr>
+<td>qwen-medium</td>
+<td>1.5B</td>
+<td>~3GB</td>
+<td>Qwen 2.5 1.5B Instruct</td>
+</tr>
+<tr>
+<td>tinyllama</td>
+<td>1.1B</td>
+<td>~2.5GB</td>
+<td>TinyLlama 1.1B Chat</td>
+</tr>
+<tr>
+<td>smollm2</td>
+<td>1.7B</td>
+<td>~3.5GB</td>
+<td>SmolLM2 1.7B Instruct</td>
+</tr>
+<tr>
+<td>phi2</td>
+<td>2.7B</td>
+<td>~5.5GB</td>
+<td>Microsoft Phi-2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kfabrik-monitoring-addon">kfabrik-monitoring Addon<a class="headerlink" href="#kfabrik-monitoring-addon" title="Permanent link">&para;</a></h3>
+<p>Deploys observability stack:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prometheus</td>
+<td>v2.51.0</td>
+<td>Metrics collection</td>
+</tr>
+<tr>
+<td>Grafana</td>
+<td>v10.4.0</td>
+<td>Visualization</td>
+</tr>
+<tr>
+<td>DCGM Exporter</td>
+<td>v4.5.1</td>
+<td>GPU metrics</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Start cluster with GPU support</span>
+kfabrik<span class="w"> </span>cluster<span class="w"> </span>start
+
+<span class="c1"># List available models</span>
+kfabrik<span class="w"> </span>list
+
+<span class="c1"># Deploy a model</span>
+kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small<span class="w"> </span>--wait
+
+<span class="c1"># Query the model</span>
+kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="w"> </span>qwen-small<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;What is Kubernetes?&quot;</span>
+
+<span class="c1"># Clean up</span>
+kfabrik<span class="w"> </span>delete<span class="w"> </span>--model<span class="w"> </span>qwen-small
+kfabrik<span class="w"> </span>cluster<span class="w"> </span>stop
+</code></pre></div>
+<h2 id="design-principles">Design Principles<a class="headerlink" href="#design-principles" title="Permanent link">&para;</a></h2>
+<p><strong>Simplicity over flexibility</strong>: Optimized for the common case of deploying HuggingFace models on GPU-enabled minikube clusters.</p>
+<p><strong>Production parity</strong>: Local deployments mirror production configurations using the same KServe InferenceService specifications and Istio routing rules.</p>
+<p><strong>Explicit over implicit</strong>: All configuration is visible and auditable. Standard Kubernetes resources that can be inspected, modified, and versioned.</p>
+<p><strong>Fast feedback</strong>: Deployment speed optimized through parallel installations, aggressive health checks, and clear progress reporting.</p>
+<p><strong>GPU-first</strong>: Assumes GPU workloads are the primary use case. Resource defaults are tuned for NVIDIA GPUs with 6GB+ VRAM.</p>
 <h2 id="quick-links">Quick Links<a class="headerlink" href="#quick-links" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="getting-started/">Getting Started</a> - Setup and installation guide (coming soon)</li>
-<li><a href="prfaq/">PRFAQ</a> - Detailed press release and FAQ</li>
+<li><a href="getting-started/">Getting Started</a> - Installation and setup guide</li>
+<li><a href="cli-reference/">CLI Reference</a> - Complete command documentation</li>
+<li><a href="architecture/">Architecture</a> - Detailed design documentation</li>
+<li><a href="addons/">Addons</a> - Addon configuration and troubleshooting</li>
 <li><a href="contributing/">Contributing</a> - How to contribute to the project</li>
 </ul>
-<h2 id="built-for-the-cncf-ecosystem">Built for the CNCF Ecosystem<a class="headerlink" href="#built-for-the-cncf-ecosystem" title="Permanent link">&para;</a></h2>
-<p>KFabrik is designed as a potential CNCF project, directly addressing the integration and cohesion gap identified in the CNCF AI landscape. Built on cloud-native principles with declarative configuration, reproducible builds, secure defaults, and zero vendor lock-in.</p>
 
 
 
@@ -705,10 +1009,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "toc.integrate"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

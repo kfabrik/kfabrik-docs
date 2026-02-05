@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://kfabrik.io/getting-started/">
+        <link rel="canonical" href="https://kfabrik.io/cli-reference/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../cli-reference/">
+        <link rel="next" href="../architecture/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Getting Started - KFabrik Documentation</title>
+        <title>CLI Reference - KFabrik Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#cli-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting Started
+              CLI Reference
             
           </span>
         </div>
@@ -226,11 +226,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
         
   
   
@@ -247,9 +245,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../cli-reference/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -435,6 +435,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -454,7 +481,7 @@
   <span class="md-ellipsis">
     
   
-    Getting Started
+    CLI Reference
   
 
     
@@ -472,7 +499,7 @@
   <span class="md-ellipsis">
     
   
-    Getting Started
+    CLI Reference
   
 
     
@@ -498,22 +525,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#synopsis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Synopsis
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Prerequisites">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#required-software" class="md-nav__link">
+  <a href="#cluster" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Required Software
+        cluster
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cluster start
       
     </span>
   </a>
@@ -521,10 +582,26 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-gpu-support-linux-only" class="md-nav__link">
+  <a href="#cluster-stop" class="md-nav__link">
     <span class="md-ellipsis">
       
-        For GPU Support (Linux only)
+        cluster stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        deploy
       
     </span>
   </a>
@@ -532,10 +609,65 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#platform-support" class="md-nav__link">
+  <a href="#delete" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform Support
+        delete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        query
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        version
       
     </span>
   </a>
@@ -548,232 +680,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
+  <a href="#available-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Requirements
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="System Requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#minimum-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Minimum Requirements
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#recommended-for-gpu-workloads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recommended for GPU Workloads
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-minikube" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install minikube
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-kfabrik-cli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install kfabrik CLI
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick Start
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Quick Start">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-start-the-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Start the Cluster
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-list-available-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. List Available Models
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-deploy-a-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Deploy a Model
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-check-model-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Check Model Status
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-query-a-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Query a Model
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-view-logs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. View Logs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-delete-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Delete Models
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-stop-the-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Stop the Cluster
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accessing-dashboards" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Accessing Dashboards
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accessing Dashboards">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grafana" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Grafana
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prometheus" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prometheus
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#manual-addon-management" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Manual Addon Management
+        Available Models
       
     </span>
   </a>
@@ -792,60 +702,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#exit-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Exit Status
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gpu-not-detected" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU Not Detected
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#model-fails-to-become-ready" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Model Fails to Become Ready
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#out-of-memory-errors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Out of Memory Errors
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Steps
+        See Also
       
     </span>
   </a>
@@ -856,33 +727,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cli-reference/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CLI Reference
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1042,144 +886,188 @@
   
 
 
-<h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
-<p>This guide walks you through setting up KFabrik and deploying your first LLM model.</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<h3 id="required-software">Required Software<a class="headerlink" href="#required-software" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>minikube</strong> v1.37.0 or later</li>
-<li><strong>kubectl</strong> (comes with minikube)</li>
-<li><strong>Docker</strong> with NVIDIA Container Toolkit (for GPU support)</li>
-</ul>
-<h3 id="for-gpu-support-linux-only">For GPU Support (Linux only)<a class="headerlink" href="#for-gpu-support-linux-only" title="Permanent link">&para;</a></h3>
-<ul>
-<li>NVIDIA GPU with drivers installed on host</li>
-<li>NVIDIA Container Toolkit configured for Docker</li>
-</ul>
-<h3 id="platform-support">Platform Support<a class="headerlink" href="#platform-support" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>GPU Support</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Linux with NVIDIA GPU</td>
-<td>Full</td>
-<td>Default configuration</td>
-</tr>
-<tr>
-<td>Linux without GPU</td>
-<td>CPU-only</td>
-<td>Auto-detected</td>
-</tr>
-<tr>
-<td>macOS</td>
-<td>CPU-only</td>
-<td>Automatic</td>
-</tr>
-<tr>
-<td>Windows</td>
-<td>CPU-only</td>
-<td>Requires WSL2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
-<h3 id="minimum-requirements">Minimum Requirements<a class="headerlink" href="#minimum-requirements" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Resource</th>
-<th>Minimum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CPU</td>
-<td>4 cores</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>8GB RAM</td>
-</tr>
-<tr>
-<td>Disk</td>
-<td>40GB</td>
-</tr>
-</tbody>
-</table>
-<h3 id="recommended-for-gpu-workloads">Recommended for GPU Workloads<a class="headerlink" href="#recommended-for-gpu-workloads" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Resource</th>
-<th>Recommended</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CPU</td>
-<td>8+ cores</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>16-32GB RAM</td>
-</tr>
-<tr>
-<td>Disk</td>
-<td>50GB+</td>
-</tr>
-<tr>
-<td>GPU VRAM</td>
-<td>6GB+</td>
-</tr>
-</tbody>
-</table>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<h3 id="install-minikube">Install minikube<a class="headerlink" href="#install-minikube" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Linux (x86_64)</span>
-curl<span class="w"> </span>-LO<span class="w"> </span>https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo<span class="w"> </span>install<span class="w"> </span>minikube-linux-amd64<span class="w"> </span>/usr/local/bin/minikube
-
-<span class="c1"># macOS</span>
-brew<span class="w"> </span>install<span class="w"> </span>minikube
-
-<span class="c1"># Windows (PowerShell as Administrator)</span>
-winget<span class="w"> </span>install<span class="w"> </span>minikube
+<h1 id="cli-reference">CLI Reference<a class="headerlink" href="#cli-reference" title="Permanent link">&para;</a></h1>
+<p>Complete reference for the kfabrik command-line interface.</p>
+<h2 id="synopsis">Synopsis<a class="headerlink" href="#synopsis" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kfabrik [GLOBAL OPTIONS] command [COMMAND OPTIONS]
 </code></pre></div>
-<h3 id="install-kfabrik-cli">Install kfabrik CLI<a class="headerlink" href="#install-kfabrik-cli" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Download the latest release</span>
-curl<span class="w"> </span>-LO<span class="w"> </span>https://github.com/kfabrik/kfabrik/releases/latest/download/kfabrik-linux-amd64
-chmod<span class="w"> </span>+x<span class="w"> </span>kfabrik-linux-amd64
-sudo<span class="w"> </span>mv<span class="w"> </span>kfabrik-linux-amd64<span class="w"> </span>/usr/local/bin/kfabrik
+<h2 id="global-options">Global Options<a class="headerlink" href="#global-options" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-h, --help</code></td>
+<td>Show help message and exit</td>
+</tr>
+<tr>
+<td><code>--kubeconfig FILE</code></td>
+<td>Path to kubeconfig file (default: $KUBECONFIG or ~/.kube/config)</td>
+</tr>
+<tr>
+<td><code>-n, --namespace NAMESPACE</code></td>
+<td>Kubernetes namespace for model deployments (default: model-serving)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
+<h3 id="cluster">cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h3>
+<p>Manage the minikube cluster lifecycle with GPU or CPU-only support.</p>
+<h4 id="cluster-start">cluster start<a class="headerlink" href="#cluster-start" title="Permanent link">&para;</a></h4>
+<p>Start a new minikube cluster configured for ML workloads.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>cluster<span class="w"> </span>start<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
 </code></pre></div>
-<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<h3 id="1-start-the-cluster">1. Start the Cluster<a class="headerlink" href="#1-start-the-cluster" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Start with GPU support (auto-detected)</span>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--cpu-only</code></td>
+<td>Force CPU-only mode, even if GPU is available</td>
+</tr>
+<tr>
+<td><code>--driver NAME</code></td>
+<td>Minikube driver to use (default: auto-detect)</td>
+</tr>
+<tr>
+<td><code>--memory MB</code></td>
+<td>Memory to allocate in megabytes (default: 32768)</td>
+</tr>
+<tr>
+<td><code>--cpus N</code></td>
+<td>Number of CPUs to allocate (default: 8)</td>
+</tr>
+<tr>
+<td><code>--skip-model</code></td>
+<td>Skip deploying the default model</td>
+</tr>
+<tr>
+<td><code>--model NAME</code></td>
+<td>Model to deploy (default: qwen-small)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Start with GPU (auto-detected)</span>
 kfabrik<span class="w"> </span>cluster<span class="w"> </span>start
 
-<span class="c1"># Or start in CPU-only mode</span>
+<span class="c1"># Start in CPU-only mode (works on macOS)</span>
 kfabrik<span class="w"> </span>cluster<span class="w"> </span>start<span class="w"> </span>--cpu-only
 
-<span class="c1"># Custom resource allocation</span>
+<span class="c1"># Start with custom resources</span>
 kfabrik<span class="w"> </span>cluster<span class="w"> </span>start<span class="w"> </span>--memory<span class="w"> </span><span class="m">16384</span><span class="w"> </span>--cpus<span class="w"> </span><span class="m">4</span>
+
+<span class="c1"># Start without deploying a model</span>
+kfabrik<span class="w"> </span>cluster<span class="w"> </span>start<span class="w"> </span>--skip-model
 </code></pre></div>
-<p>The <code>cluster start</code> command:</p>
-<ol>
-<li>Starts minikube with Docker driver and GPU passthrough</li>
-<li>Enables kfabrik-bootstrap addon (installs KServe, Istio, Cert-Manager)</li>
-<li>Enables kfabrik-model addon (creates model configurations)</li>
-<li>Enables kfabrik-monitoring addon (deploys Prometheus, Grafana)</li>
-<li>Deploys the default model (qwen-small)</li>
-</ol>
-<h3 id="2-list-available-models">2. List Available Models<a class="headerlink" href="#2-list-available-models" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>list
+<h4 id="cluster-stop">cluster stop<a class="headerlink" href="#cluster-stop" title="Permanent link">&para;</a></h4>
+<p>Stop and delete the minikube cluster, cleaning up all resources.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>cluster<span class="w"> </span>stop
 </code></pre></div>
-<p>Output:
+<hr />
+<h3 id="deploy">deploy<a class="headerlink" href="#deploy" title="Permanent link">&para;</a></h3>
+<p>Deploy one or more LLM models to Kubernetes using KServe InferenceServices.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>deploy<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
+</code></pre></div>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--models MODEL[,MODEL...]</code></td>
+<td>Comma-separated list of models to deploy</td>
+</tr>
+<tr>
+<td><code>--all</code></td>
+<td>Deploy all configured models</td>
+</tr>
+<tr>
+<td><code>--wait</code></td>
+<td>Wait for models to become ready before returning</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Deploy a single model</span>
+kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small
+
+<span class="c1"># Deploy multiple models</span>
+kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small,tinyllama
+
+<span class="c1"># Deploy and wait for readiness</span>
+kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-medium<span class="w"> </span>--wait
+</code></pre></div>
+<hr />
+<h3 id="delete">delete<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h3>
+<p>Delete one or more deployed models from Kubernetes.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>delete<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
+</code></pre></div>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model NAME</code></td>
+<td>Name of the model to delete</td>
+</tr>
+<tr>
+<td><code>--all</code></td>
+<td>Delete all deployed models</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Delete a specific model</span>
+kfabrik<span class="w"> </span>delete<span class="w"> </span>--model<span class="w"> </span>qwen-small
+
+<span class="c1"># Delete all models</span>
+kfabrik<span class="w"> </span>delete<span class="w"> </span>--all
+</code></pre></div>
+<hr />
+<h3 id="list">list<a class="headerlink" href="#list" title="Permanent link">&para;</a></h3>
+<p>List models available for deployment or currently deployed.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
+</code></pre></div>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--available</code></td>
+<td>List available models from configuration</td>
+</tr>
+<tr>
+<td><code>--deployed</code></td>
+<td>List currently deployed models with their status</td>
+</tr>
+</tbody>
+</table>
+<p>Without flags, lists both available and deployed models.</p>
+<p><strong>Example Output:</strong></p>
 <div class="highlight"><pre><span></span><code>Available Models (all fit in 6GB VRAM):
   NAME         PARAMS  VRAM   DOWNLOAD  DISPLAY NAME
   qwen-small   0.5B    1GB    1GB       Qwen 2.5 0.5B Instruct
@@ -1191,41 +1079,133 @@ kfabrik<span class="w"> </span>cluster<span class="w"> </span>start<span class="
 Deployed Models:
   NAME        READY  URL
   qwen-small  True   http://qwen-small-model-serving.example.com
-</code></pre></div></p>
-<h3 id="3-deploy-a-model">3. Deploy a Model<a class="headerlink" href="#3-deploy-a-model" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Deploy a single model</span>
-kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small
+</code></pre></div>
+<hr />
+<h3 id="status">status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<p>Check the status of deployed models.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>status<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
+</code></pre></div>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model NAME</code></td>
+<td>Name of the model to check</td>
+</tr>
+<tr>
+<td><code>--all</code></td>
+<td>Check status of all deployed models</td>
+</tr>
+<tr>
+<td><code>-o, --output FORMAT</code></td>
+<td>Output format: table (default) or json</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check specific model</span>
+kfabrik<span class="w"> </span>status<span class="w"> </span>--model<span class="w"> </span>qwen-small
 
-<span class="c1"># Deploy and wait for readiness</span>
-kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-medium<span class="w"> </span>--wait
+<span class="c1"># Check all models as JSON</span>
+kfabrik<span class="w"> </span>status<span class="w"> </span>--all<span class="w"> </span>--output<span class="w"> </span>json
+</code></pre></div>
+<hr />
+<h3 id="query">query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
+<p>Send an inference query to a deployed model using the OpenAI-compatible chat completions API.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>query<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
+</code></pre></div>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model NAME</code></td>
+<td>Name of the model to query (required)</td>
+</tr>
+<tr>
+<td><code>--prompt TEXT</code></td>
+<td>Prompt to send to the model (required)</td>
+</tr>
+<tr>
+<td><code>--temperature FLOAT</code></td>
+<td>Sampling temperature 0.0-2.0 (default: 0.7)</td>
+</tr>
+<tr>
+<td><code>--max-tokens INT</code></td>
+<td>Maximum tokens to generate (default: 256)</td>
+</tr>
+<tr>
+<td><code>--top-p FLOAT</code></td>
+<td>Top-p sampling parameter 0.0-1.0 (default: 0.9)</td>
+</tr>
+<tr>
+<td><code>--timeout SECONDS</code></td>
+<td>Request timeout in seconds (default: 120)</td>
+</tr>
+</tbody>
+</table>
+<p>The command automatically sets up port-forwarding to the model's predictor service.</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic query</span>
+kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="w"> </span>qwen-small<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;What is Kubernetes?&quot;</span>
 
-<span class="c1"># Deploy multiple models</span>
-kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small,tinyllama
+<span class="c1"># Query with custom parameters</span>
+kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="w"> </span>qwen-medium<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--prompt<span class="w"> </span><span class="s2">&quot;Explain machine learning in simple terms&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--temperature<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--max-tokens<span class="w"> </span><span class="m">500</span>
 </code></pre></div>
-<h3 id="4-check-model-status">4. Check Model Status<a class="headerlink" href="#4-check-model-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>status<span class="w"> </span>--model<span class="w"> </span>qwen-small
-</code></pre></div>
-<p>Output:
-<div class="highlight"><pre><span></span><code>NAME        READY  REASON  URL
-qwen-small  True   Ready   http://qwen-small-model-serving.example.com
-</code></pre></div></p>
-<h3 id="5-query-a-model">5. Query a Model<a class="headerlink" href="#5-query-a-model" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="w"> </span>qwen-small<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;What is Kubernetes?&quot;</span>
-</code></pre></div>
-<p>Output:
+<p><strong>Example Output:</strong></p>
 <div class="highlight"><pre><span></span><code>Model: qwen-small
 Response:
 Kubernetes is an open-source container orchestration platform...
 
 [Tokens: prompt=34, completion=156, total=190]
-</code></pre></div></p>
-<p>Query with custom parameters:
-<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="w"> </span>qwen-medium<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--prompt<span class="w"> </span><span class="s2">&quot;Explain machine learning in simple terms&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--temperature<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--max-tokens<span class="w"> </span><span class="m">500</span>
-</code></pre></div></p>
-<h3 id="6-view-logs">6. View Logs<a class="headerlink" href="#6-view-logs" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+<hr />
+<h3 id="logs">logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h3>
+<p>View logs for a deployed model's pods.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>logs<span class="w"> </span><span class="o">[</span>FLAGS<span class="o">]</span>
+</code></pre></div>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model NAME</code></td>
+<td>Name of the model (required)</td>
+</tr>
+<tr>
+<td><code>-f, --follow</code></td>
+<td>Stream log output (like tail -f)</td>
+</tr>
+<tr>
+<td><code>--lines INT</code></td>
+<td>Number of lines to show (default: 50)</td>
+</tr>
+<tr>
+<td><code>-c, --container NAME</code></td>
+<td>Container name (default: first container)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># View recent logs</span>
 kfabrik<span class="w"> </span>logs<span class="w"> </span>--model<span class="w"> </span>qwen-small
 
@@ -1235,46 +1215,62 @@ kfabrik<span class="w"> </span>logs<span class="w"> </span>--model<span class="w
 <span class="c1"># Show last 100 lines</span>
 kfabrik<span class="w"> </span>logs<span class="w"> </span>--model<span class="w"> </span>qwen-small<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
 </code></pre></div>
-<h3 id="7-delete-models">7. Delete Models<a class="headerlink" href="#7-delete-models" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Delete a specific model</span>
-kfabrik<span class="w"> </span>delete<span class="w"> </span>--model<span class="w"> </span>qwen-small
-
-<span class="c1"># Delete all models</span>
-kfabrik<span class="w"> </span>delete<span class="w"> </span>--all
+<hr />
+<h3 id="version">version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h3>
+<p>Print the version of kfabrik.</p>
+<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>version
 </code></pre></div>
-<h3 id="8-stop-the-cluster">8. Stop the Cluster<a class="headerlink" href="#8-stop-the-cluster" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>kfabrik<span class="w"> </span>cluster<span class="w"> </span>stop
-</code></pre></div>
-<h2 id="accessing-dashboards">Accessing Dashboards<a class="headerlink" href="#accessing-dashboards" title="Permanent link">&para;</a></h2>
-<h3 id="grafana">Grafana<a class="headerlink" href="#grafana" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/grafana<span class="w"> </span><span class="m">3000</span>:3000
-</code></pre></div>
-Open http://localhost:3000 (Login: admin / admin)</p>
-<h3 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/prometheus<span class="w"> </span><span class="m">9090</span>:9090
-</code></pre></div>
-Open http://localhost:9090</p>
-<h2 id="manual-addon-management">Manual Addon Management<a class="headerlink" href="#manual-addon-management" title="Permanent link">&para;</a></h2>
-<p>If you prefer to manage addons separately:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Start minikube with GPU support</span>
-minikube<span class="w"> </span>start<span class="w"> </span>--driver<span class="o">=</span>docker<span class="w"> </span>--memory<span class="o">=</span><span class="m">32768</span><span class="w"> </span>--cpus<span class="o">=</span><span class="m">8</span><span class="w"> </span>--gpus<span class="o">=</span>all
-
-<span class="c1"># Enable core infrastructure</span>
-minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-bootstrap
-
-<span class="c1"># Wait for installation to complete</span>
-kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span><span class="nb">complete</span><span class="w"> </span>job/kfabrik-installer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-n<span class="w"> </span>kserve<span class="w"> </span>--timeout<span class="o">=</span>600s
-
-<span class="c1"># Enable model configurations</span>
-minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-model
-
-<span class="c1"># Enable monitoring (optional)</span>
-minikube<span class="w"> </span>addons<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kfabrik-monitoring
-
-<span class="c1"># Deploy a model</span>
-kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class="w"> </span>qwen-small<span class="w"> </span>--wait
-</code></pre></div>
+<h2 id="available-models">Available Models<a class="headerlink" href="#available-models" title="Permanent link">&para;</a></h2>
+<p>The following models are pre-configured and optimized for consumer GPUs with 6GB VRAM or less:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Parameters</th>
+<th>VRAM</th>
+<th>Download</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qwen-small</td>
+<td>0.5B</td>
+<td>~1GB</td>
+<td>~1GB</td>
+<td>Qwen 2.5 0.5B Instruct</td>
+</tr>
+<tr>
+<td>qwen-medium</td>
+<td>1.5B</td>
+<td>~3GB</td>
+<td>~3GB</td>
+<td>Qwen 2.5 1.5B Instruct</td>
+</tr>
+<tr>
+<td>tinyllama</td>
+<td>1.1B</td>
+<td>~2.5GB</td>
+<td>~2.2GB</td>
+<td>TinyLlama 1.1B Chat</td>
+</tr>
+<tr>
+<td>smollm2</td>
+<td>1.7B</td>
+<td>~3.5GB</td>
+<td>~3.4GB</td>
+<td>SmolLM2 1.7B Instruct</td>
+</tr>
+<tr>
+<td>phi2</td>
+<td>2.7B</td>
+<td>~5.5GB</td>
+<td>~5.5GB</td>
+<td>Microsoft Phi-2</td>
+</tr>
+</tbody>
+</table>
+<p>Models are deployed one at a time; you don't need VRAM for all models simultaneously. System RAM requirements are approximately 2-3x the model size for inference server overhead.</p>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1307,38 +1303,30 @@ kfabrik<span class="w"> </span>deploy<span class="w"> </span>--models<span class
 </tr>
 </tbody>
 </table>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="gpu-not-detected">GPU Not Detected<a class="headerlink" href="#gpu-not-detected" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verify NVIDIA driver on host</span>
-nvidia-smi
-
-<span class="c1"># Check device plugin logs</span>
-kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">name</span><span class="o">=</span>nvidia-device-plugin-ds
-
-<span class="c1"># Verify GPU is advertised</span>
-kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>minikube<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nvidia.com/gpu
-</code></pre></div>
-<h3 id="model-fails-to-become-ready">Model Fails to Become Ready<a class="headerlink" href="#model-fails-to-become-ready" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Check InferenceService status</span>
-kfabrik<span class="w"> </span>status<span class="w"> </span>--model<span class="w"> </span>&lt;name&gt;
-
-<span class="c1"># Check predictor pod logs</span>
-kfabrik<span class="w"> </span>logs<span class="w"> </span>--model<span class="w"> </span>&lt;name&gt;
-
-<span class="c1"># Check KServe controller logs</span>
-kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kserve<span class="w"> </span>-l<span class="w"> </span>control-plane<span class="o">=</span>kserve-controller-manager
-</code></pre></div>
-<h3 id="out-of-memory-errors">Out of Memory Errors<a class="headerlink" href="#out-of-memory-errors" title="Permanent link">&para;</a></h3>
-<p>Increase minikube memory allocation:</p>
-<div class="highlight"><pre><span></span><code>minikube<span class="w"> </span>stop
-minikube<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>memory<span class="w"> </span><span class="m">32768</span>
-minikube<span class="w"> </span>start<span class="w"> </span>--gpus<span class="o">=</span>all
-</code></pre></div>
-<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<h2 id="exit-status">Exit Status<a class="headerlink" href="#exit-status" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Success</td>
+</tr>
+<tr>
+<td>1</td>
+<td>General error (invalid arguments, connection failed, etc.)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../cli-reference/">CLI Reference</a> - Complete command documentation</li>
-<li><a href="../architecture/">Architecture</a> - Understand how KFabrik works</li>
-<li><a href="../addons/">Addons</a> - Addon configuration and customization</li>
+<li><a href="../getting-started/">Getting Started</a> - Installation and setup</li>
+<li><a href="../addons/">Addons</a> - Addon configuration</li>
+<li><a href="../architecture/">Architecture</a> - How KFabrik works</li>
 </ul>
 
 
