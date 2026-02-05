@@ -1002,55 +1002,35 @@
 <p>This document describes the architecture, component interactions, and operational characteristics of the KFabrik platform.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>KFabrik consists of four primary components that work together to provide a complete ML inference platform:</p>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────────────┐
-│                         User Workstation                                │
-│                                                                          │
-│   ┌─────────────┐                                                       │
-│   │   kfabrik   │  CLI for model deployment, querying, and management  │
-│   │    CLI      │                                                       │
-│   └──────┬──────┘                                                       │
-│          │                                                               │
-│          │ kubectl / kubernetes API                                      │
-│          ▼                                                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│                     Minikube Cluster (Docker Driver)                    │
-│                                                                          │
-│   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │                    kfabrik-bootstrap addon                      │   │
-│   │                                                                  │   │
-│   │   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │   │
-│   │   │ Cert-Manager │  │    Istio     │  │   KServe     │         │   │
-│   │   │   v1.16.1    │  │   v1.22.0    │  │   v0.15.0    │         │   │
-│   │   └──────────────┘  └──────────────┘  └──────────────┘         │   │
-│   │                                                                  │   │
-│   │   ┌──────────────────────────────────────────────────┐         │   │
-│   │   │           NVIDIA Device Plugin v0.14.1           │         │   │
-│   │   └──────────────────────────────────────────────────┘         │   │
-│   └─────────────────────────────────────────────────────────────────┘   │
-│                                                                          │
-│   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │                    kfabrik-model addon                          │   │
-│   │                                                                  │   │
-│   │   ┌──────────────────────────────────────────────────┐         │   │
-│   │   │              model-serving namespace             │         │   │
-│   │   │                                                  │         │   │
-│   │   │   ConfigMap: model-config (5 pre-configured)    │         │   │
-│   │   │   InferenceServices: user-deployed models       │         │   │
-│   │   │   Predictor Pods: model inference containers    │         │   │
-│   │   └──────────────────────────────────────────────────┘         │   │
-│   └─────────────────────────────────────────────────────────────────┘   │
-│                                                                          │
-│   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │                  kfabrik-monitoring addon                       │   │
-│   │                                                                  │
-│   │   ┌────────────┐  ┌────────────┐  ┌─────────────────┐          │   │
-│   │   │ Prometheus │  │  Grafana   │  │  DCGM Exporter  │          │   │
-│   │   │  v2.51.0   │  │  v10.4.0   │  │    v4.5.1       │          │   │
-│   │   └────────────┘  └────────────┘  └─────────────────┘          │   │
-│   └─────────────────────────────────────────────────────────────────┘   │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-</code></pre></div>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Workstation["User Workstation"]
+        CLI["kfabrik CLI"]
+    end
+
+    CLI --&gt;|"kubectl / Kubernetes API"| Cluster
+
+    subgraph Cluster["Minikube Cluster (Docker Driver)"]
+        subgraph Bootstrap["kfabrik-bootstrap addon"]
+            CertManager["Cert-Manager"]
+            Istio["Istio"]
+            KServe["KServe"]
+            NvidiaPlugin["NVIDIA Device Plugin"]
+        end
+
+        subgraph Model["kfabrik-model addon"]
+            subgraph ModelServing["model-serving namespace"]
+                ConfigMap["ConfigMap: model-config"]
+                InferenceServices["InferenceServices"]
+                Predictors["Predictor Pods"]
+            end
+        end
+
+        subgraph Monitoring["kfabrik-monitoring addon"]
+            Prometheus["Prometheus"]
+            Grafana["Grafana"]
+            DCGM["DCGM Exporter"]
+        end
+    end</code></pre>
 <h2 id="component-responsibilities">Component Responsibilities<a class="headerlink" href="#component-responsibilities" title="Permanent link">&para;</a></h2>
 <h3 id="kfabrik-cli">kfabrik CLI<a class="headerlink" href="#kfabrik-cli" title="Permanent link">&para;</a></h3>
 <p>Provides a command-line interface for deploying models, querying inference endpoints, and managing the model lifecycle. The CLI communicates with the Kubernetes API to create InferenceService resources and uses kubectl port-forwarding to access inference endpoints.</p>
@@ -1080,41 +1060,37 @@
 <p>Prometheus is pre-configured to scrape KServe inference metrics and DCGM GPU metrics.</p>
 <h2 id="bootstrap-installation-sequence">Bootstrap Installation Sequence<a class="headerlink" href="#bootstrap-installation-sequence" title="Permanent link">&para;</a></h2>
 <p>The bootstrap addon installs components through a sequenced process with explicit health checks:</p>
-<div class="highlight"><pre><span></span><code>Phase 1: Cert-Manager Installation (timeout: 600s)
-├── Add Jetstack Helm repository
-├── Helm install cert-manager with CRDs enabled
-├── Wait for cert-manager deployment (3 replicas)
-├── Wait for cert-manager-webhook deployment
-├── Wait for cert-manager-cainjector deployment
-└── Verify certificates.cert-manager.io CRD exists
+<pre class="mermaid"><code>flowchart TD
+    subgraph Phase1["Phase 1: Cert-Manager Installation"]
+        P1A["Add Jetstack Helm repository"] --&gt; P1B["Helm install cert-manager with CRDs"]
+        P1B --&gt; P1C["Wait for deployments"]
+        P1C --&gt; P1D["Verify CRD exists"]
+    end
 
-Phase 2: Istio Installation (timeout: 600s)
-├── Add Istio Helm repository
-├── Helm install istio-base (CRDs and cluster resources)
-├── Helm install istiod (control plane)
-├── Wait for istiod deployment
-├── Verify gateways.networking.istio.io CRD exists
-└── Create istio IngressClass resource
+    subgraph Phase2["Phase 2: Istio Installation"]
+        P2A["Add Istio Helm repository"] --&gt; P2B["Helm install istio-base"]
+        P2B --&gt; P2C["Helm install istiod"]
+        P2C --&gt; P2D["Wait for istiod deployment"]
+        P2D --&gt; P2E["Create IngressClass"]
+    end
 
-Phase 3: KServe Cleanup (idempotency preparation)
-├── Delete existing ClusterRoles
-├── Delete existing ClusterRoleBindings
-├── Delete existing ValidatingWebhookConfigurations
-├── Delete existing MutatingWebhookConfigurations
-├── Delete existing CRDs
-└── Wait 5 seconds for cleanup completion
+    subgraph Phase3["Phase 3: KServe Cleanup"]
+        P3A["Delete existing ClusterRoles"] --&gt; P3B["Delete webhooks &amp; CRDs"]
+        P3B --&gt; P3C["Wait for cleanup"]
+    end
 
-Phase 4: KServe Installation (timeout: 600s)
-├── Helm install kserve-crd from OCI registry
-├── Helm install kserve controller with RawDeployment mode
-├── Wait for kserve-controller-manager deployment
-└── Verify inferenceservices.serving.kserve.io CRD exists
+    subgraph Phase4["Phase 4: KServe Installation"]
+        P4A["Helm install kserve-crd"] --&gt; P4B["Helm install kserve controller"]
+        P4B --&gt; P4C["Wait for controller-manager"]
+        P4C --&gt; P4D["Verify CRD exists"]
+    end
 
-Phase 5: GPU Node Labeling
-├── Query nodes for nvidia.com/gpu capacity
-├── Label GPU nodes with nvidia.com/gpu.present=true
-└── Log warning if no GPU nodes found
-</code></pre></div>
+    subgraph Phase5["Phase 5: GPU Node Labeling"]
+        P5A["Query nodes for GPU capacity"] --&gt; P5B["Label GPU nodes"]
+        P5B --&gt; P5C["Log warning if no GPUs"]
+    end
+
+    Phase1 --&gt; Phase2 --&gt; Phase3 --&gt; Phase4 --&gt; Phase5</code></pre>
 <h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
 <h3 id="why-rawdeployment-mode">Why RawDeployment Mode?<a class="headerlink" href="#why-rawdeployment-mode" title="Permanent link">&para;</a></h3>
 <p>KServe supports two deployment modes: Serverless (using Knative) and RawDeployment (using standard Kubernetes Deployments). KFabrik currently uses RawDeployment for simplicity—it's easier to set up, debug, and operate for local development.</p>
@@ -1125,27 +1101,33 @@ Phase 5: GPU Node Labeling
 <p>KServe's webhook configurations and CRDs can become orphaned when previous installations fail mid-process. The cleanup phase ensures idempotent behavior: running the installer multiple times produces the same result.</p>
 <h2 id="model-deployment-flow">Model Deployment Flow<a class="headerlink" href="#model-deployment-flow" title="Permanent link">&para;</a></h2>
 <p>When a user runs <code>kfabrik deploy --models qwen-small</code>:</p>
-<div class="highlight"><pre><span></span><code>1. CLI reads model-config ConfigMap from model-serving namespace
-2. CLI parses YAML and extracts qwen-small configuration
-3. CLI applies default resource values for any unspecified fields
-4. CLI checks if InferenceService qwen-small already exists
-   └── If exists: skip deployment (idempotent)
-   └── If not exists: continue
-5. CLI creates InferenceService resource via Kubernetes API
-6. KServe controller watches InferenceService creation
-7. Controller creates:
-   ├── Predictor Deployment (model inference container)
-   ├── Predictor Service (internal ClusterIP)
-   ├── Istio VirtualService (ingress routing)
-   └── Istio DestinationRule (traffic management)
-8. Predictor pod starts:
-   ├── Downloads model from HuggingFace (storageUri)
-   ├── Initializes inference server (vLLM/TGI)
-   └── Exposes prediction endpoint on port 80
-9. Pod readiness probe succeeds
-10. InferenceService status updated to Ready=True
-11. CLI detects Ready status (if --wait flag specified)
-</code></pre></div>
+<pre class="mermaid"><code>sequenceDiagram
+    participant CLI as kfabrik CLI
+    participant K8s as Kubernetes API
+    participant KServe as KServe Controller
+    participant Pod as Predictor Pod
+
+    CLI-&gt;&gt;K8s: Read model-config ConfigMap
+    K8s--&gt;&gt;CLI: Return configuration
+    CLI-&gt;&gt;CLI: Parse YAML, apply defaults
+    CLI-&gt;&gt;K8s: Check if InferenceService exists
+
+    alt Already exists
+        K8s--&gt;&gt;CLI: Skip (idempotent)
+    else Does not exist
+        CLI-&gt;&gt;K8s: Create InferenceService
+        K8s-&gt;&gt;KServe: Watch event
+        KServe-&gt;&gt;K8s: Create Deployment
+        KServe-&gt;&gt;K8s: Create Service
+        KServe-&gt;&gt;K8s: Create VirtualService
+        KServe-&gt;&gt;K8s: Create DestinationRule
+        K8s-&gt;&gt;Pod: Schedule pod
+        Pod-&gt;&gt;Pod: Download model from HuggingFace
+        Pod-&gt;&gt;Pod: Initialize inference server
+        Pod--&gt;&gt;K8s: Readiness probe succeeds
+        KServe-&gt;&gt;K8s: Update status Ready=True
+        K8s--&gt;&gt;CLI: Ready status (if --wait)
+    end</code></pre>
 <h2 id="inferenceservice-specification">InferenceService Specification<a class="headerlink" href="#inferenceservice-specification" title="Permanent link">&para;</a></h2>
 <p>The CLI generates InferenceService resources with the following structure:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">serving.kserve.io/v1beta1</span>
@@ -1177,42 +1159,25 @@ Phase 5: GPU Node Labeling
 <span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;float16&quot;</span>
 </code></pre></div>
 <h2 id="monitoring-architecture">Monitoring Architecture<a class="headerlink" href="#monitoring-architecture" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────────┐
-│                      monitoring namespace                           │
-│                                                                      │
-│  ┌─────────────────┐      scrape       ┌─────────────────────────┐ │
-│  │   Prometheus    │◄──────────────────│    DCGM Exporter        │ │
-│  │                 │      :9400        │    (DaemonSet)          │ │
-│  │  • Scrape jobs  │                   │    GPU nodes only       │ │
-│  │  • Alert rules  │                   └─────────────────────────┘ │
-│  │  • TSDB storage │                                               │
-│  └────────┬────────┘                                               │
-│           │                                                         │
-│           │ query :9090                                             │
-│           ▼                                                         │
-│  ┌─────────────────┐                                               │
-│  │    Grafana      │                                               │
-│  │                 │                                               │
-│  │  • Dashboards   │                                               │
-│  │  • Data sources │                                               │
-│  │  • Alerting     │                                               │
-│  └─────────────────┘                                               │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
-            ▲
-            │ scrape
-            │
-┌───────────┴─────────────────────────────────────────────────────────┐
-│                    model-serving namespace                          │
-│                                                                      │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐    │
-│  │  qwen-small     │  │  qwen-medium    │  │    phi2         │    │
-│  │  predictor      │  │  predictor      │  │  predictor      │    │
-│  │    :9090        │  │    :9090        │  │    :9090        │    │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘    │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
-</code></pre></div>
+<pre class="mermaid"><code>flowchart TB
+    subgraph monitoring["monitoring namespace"]
+        Prometheus["Prometheus&lt;br/&gt;• Scrape jobs&lt;br/&gt;• Alert rules&lt;br/&gt;• TSDB storage"]
+        Grafana["Grafana&lt;br/&gt;• Dashboards&lt;br/&gt;• Data sources&lt;br/&gt;• Alerting"]
+        DCGM["DCGM Exporter&lt;br/&gt;(DaemonSet)&lt;br/&gt;GPU nodes only"]
+
+        DCGM --&gt;|"scrape :9400"| Prometheus
+        Prometheus --&gt;|"query :9090"| Grafana
+    end
+
+    subgraph model-serving["model-serving namespace"]
+        qwen-small["qwen-small&lt;br/&gt;predictor :9090"]
+        qwen-medium["qwen-medium&lt;br/&gt;predictor :9090"]
+        phi2["phi2&lt;br/&gt;predictor :9090"]
+    end
+
+    qwen-small --&gt;|scrape| Prometheus
+    qwen-medium --&gt;|scrape| Prometheus
+    phi2 --&gt;|scrape| Prometheus</code></pre>
 <h3 id="prometheus-scrape-jobs">Prometheus Scrape Jobs<a class="headerlink" href="#prometheus-scrape-jobs" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1344,7 +1309,6 @@ Phase 5: GPU Node Labeling
 <thead>
 <tr>
 <th>Component</th>
-<th>Version</th>
 <th>Source</th>
 <th>Purpose</th>
 </tr>
@@ -1352,43 +1316,36 @@ Phase 5: GPU Node Labeling
 <tbody>
 <tr>
 <td>Cert-Manager</td>
-<td>v1.16.1</td>
 <td>Jetstack Helm</td>
 <td>TLS certificate management</td>
 </tr>
 <tr>
 <td>Istio</td>
-<td>v1.22.0</td>
 <td>Istio Helm</td>
 <td>Service mesh, ingress</td>
 </tr>
 <tr>
 <td>KServe</td>
-<td>v0.15.0</td>
 <td>KServe OCI</td>
 <td>Model serving platform</td>
 </tr>
 <tr>
 <td>NVIDIA Device Plugin</td>
-<td>v0.14.1</td>
 <td>NVIDIA</td>
 <td>GPU resource scheduling</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>v2.51.0</td>
 <td>Docker Hub</td>
 <td>Metrics collection</td>
 </tr>
 <tr>
 <td>Grafana</td>
-<td>v10.4.0</td>
 <td>Docker Hub</td>
 <td>Visualization</td>
 </tr>
 <tr>
 <td>DCGM Exporter</td>
-<td>v4.5.1</td>
 <td>NVIDIA</td>
 <td>GPU metrics</td>
 </tr>

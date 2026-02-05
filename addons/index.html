@@ -994,17 +994,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#version-compatibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Version Compatibility
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1128,12 +1117,13 @@
 <p>The KFabrik addon suite provides a complete machine learning inference platform for minikube, enabling local development and testing of Large Language Models (LLMs) with GPU support.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The suite consists of three addons that work together:</p>
-<div class="highlight"><pre><span></span><code>kfabrik-bootstrap (required first)
-       │
-       ├──► kfabrik-model (optional, for LLM deployment)
-       │
-       └──► kfabrik-monitoring (optional, for observability)
-</code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    bootstrap["kfabrik-bootstrap&lt;br/&gt;(required first)"]
+    model["kfabrik-model&lt;br/&gt;(optional)"]
+    monitoring["kfabrik-monitoring&lt;br/&gt;(optional)"]
+
+    bootstrap --&gt; model
+    bootstrap --&gt; monitoring</code></pre>
 <p>The kfabrik-bootstrap addon must be enabled first as it provides the core infrastructure (KServe, Istio) that other addons depend on.</p>
 <h2 id="kfabrik-bootstrap">kfabrik-bootstrap<a class="headerlink" href="#kfabrik-bootstrap" title="Permanent link">&para;</a></h2>
 <h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
@@ -1143,29 +1133,24 @@
 <thead>
 <tr>
 <th>Component</th>
-<th>Version</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Cert Manager</td>
-<td>v1.16.1</td>
 <td>TLS certificate lifecycle management</td>
 </tr>
 <tr>
 <td>Istio</td>
-<td>v1.22.0</td>
 <td>Service mesh for traffic and security</td>
 </tr>
 <tr>
 <td>KServe</td>
-<td>v0.15.0</td>
 <td>Kubernetes-native ML model serving</td>
 </tr>
 <tr>
 <td>NVIDIA Device Plugin</td>
-<td>v0.14.1</td>
 <td>GPU resource discovery and allocation</td>
 </tr>
 </tbody>
@@ -1214,9 +1199,6 @@ kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> <
 <span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kfabrik-bootstrap-config</span>
 <span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kserve</span>
 <span class="nt">data</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">CERT_MANAGER_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v1.16.1&quot;</span>
-<span class="w">  </span><span class="nt">ISTIO_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.22.0&quot;</span>
-<span class="w">  </span><span class="nt">KSERVE_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v0.15.0&quot;</span>
 <span class="w">  </span><span class="nt">INSTALL_CERT_MANAGER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
 <span class="w">  </span><span class="nt">INSTALL_ISTIO</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
 <span class="w">  </span><span class="nt">INSTALL_KSERVE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
@@ -1387,24 +1369,20 @@ kfabrik<span class="w"> </span>delete<span class="w"> </span>--model<span class=
 <thead>
 <tr>
 <th>Component</th>
-<th>Version</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Prometheus</td>
-<td>v2.51.0</td>
 <td>Metrics collection and storage</td>
 </tr>
 <tr>
 <td>Grafana</td>
-<td>10.4.0</td>
 <td>Visualization and dashboards</td>
 </tr>
 <tr>
 <td>DCGM Exporter</td>
-<td>4.5.1</td>
 <td>NVIDIA GPU metrics exporter</td>
 </tr>
 </tbody>
@@ -1438,9 +1416,6 @@ kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> <
 <span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kfabrik-monitoring-config</span>
 <span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
 <span class="nt">data</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">PROMETHEUS_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v2.51.0&quot;</span>
-<span class="w">  </span><span class="nt">GRAFANA_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10.4.0&quot;</span>
-<span class="w">  </span><span class="nt">DCGM_EXPORTER_VERSION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4.5.1-4.8.0&quot;</span>
 <span class="w">  </span><span class="nt">PROMETHEUS_RETENTION</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;15d&quot;</span>
 <span class="w">  </span><span class="nt">PROMETHEUS_STORAGE_SIZE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10Gi&quot;</span>
 <span class="w">  </span><span class="nt">GRAFANA_ADMIN_USER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span>
@@ -1615,45 +1590,6 @@ minikube<span class="w"> </span>config<span class="w"> </span><span class="nb">s
 minikube<span class="w"> </span>start<span class="w"> </span>--gpus<span class="o">=</span>all
 </code></pre></div></p>
 <hr />
-<h2 id="version-compatibility">Version Compatibility<a class="headerlink" href="#version-compatibility" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>minikube</th>
-<th>Kubernetes</th>
-<th>Cert Manager</th>
-<th>Istio</th>
-<th>KServe</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.37.x</td>
-<td>1.28-1.32</td>
-<td>v1.16.1</td>
-<td>1.22.0</td>
-<td>v0.15.0</td>
-<td>Tested</td>
-</tr>
-<tr>
-<td>1.36.x</td>
-<td>1.28-1.31</td>
-<td>v1.16.1</td>
-<td>1.22.0</td>
-<td>v0.15.0</td>
-<td>Untested</td>
-</tr>
-<tr>
-<td>&lt; 1.36</td>
-<td>&lt; 1.28</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>Not supported</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>

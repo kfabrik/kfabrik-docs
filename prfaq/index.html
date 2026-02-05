@@ -857,7 +857,7 @@ kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="
 <li>RAM: 8GB (16-32GB recommended for GPU workloads)</li>
 <li>Disk: 40GB</li>
 <li>GPU: NVIDIA GPU with 6GB+ VRAM (optional but recommended)</li>
-<li>OS: Linux (full GPU support), macOS or Windows (CPU-only)</li>
+<li>OS: Linux (macOS and Windows support coming soon)</li>
 </ul>
 <p><strong>Q: What components does KFabrik install?</strong></p>
 <p>A: KFabrik installs the following components:</p>
@@ -865,44 +865,36 @@ kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="
 <thead>
 <tr>
 <th>Component</th>
-<th>Version</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Cert-Manager</td>
-<td>v1.16.1</td>
 <td>TLS certificate management</td>
 </tr>
 <tr>
 <td>Istio</td>
-<td>v1.22.0</td>
 <td>Service mesh and ingress</td>
 </tr>
 <tr>
 <td>KServe</td>
-<td>v0.15.0</td>
 <td>Model serving platform</td>
 </tr>
 <tr>
 <td>NVIDIA Device Plugin</td>
-<td>v0.14.1</td>
 <td>GPU resource scheduling</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>v2.51.0</td>
 <td>Metrics collection</td>
 </tr>
 <tr>
 <td>Grafana</td>
-<td>v10.4.0</td>
 <td>Visualization</td>
 </tr>
 <tr>
 <td>DCGM Exporter</td>
-<td>v4.5.1</td>
 <td>GPU metrics</td>
 </tr>
 </tbody>
@@ -912,8 +904,8 @@ kfabrik<span class="w"> </span>query<span class="w"> </span>--model<span class="
 <ul>
 <li>Linux with NVIDIA GPU: Full GPU acceleration (default)</li>
 <li>Linux without GPU: CPU-only mode (auto-detected)</li>
-<li>macOS: CPU-only mode (automatic)</li>
-<li>Windows: CPU-only mode (automatic)</li>
+<li>macOS: Coming soon</li>
+<li>Windows: Coming soon</li>
 </ul>
 <p>The <code>--cpu-only</code> flag can force CPU-only mode even when a GPU is available.</p>
 <p><strong>Q: What models are pre-configured?</strong></p>
